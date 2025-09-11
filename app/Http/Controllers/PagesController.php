@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\PagesController;
+
+class PagesController extends Controller
+{
+    
+    public function index()
+    {
+        return view('index');
+    }
+
+    public function registrarse()
+    {
+        return view('registrarse');
+    }
+
+     public function servicios()
+    {
+        return view('servicios');
+    }
+
+   
+
+}

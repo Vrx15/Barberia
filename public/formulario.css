@@ -1,0 +1,435 @@
+/* Reset general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  color: #333;
+  background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+header {
+  background-color: rgba(26, 26, 26, 0.9);
+  padding: 20px 0;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.encabezado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.encabezado a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  position: relative;
+}
+
+.encabezado a:hover {
+  color: #ffcc00;
+  transform: translateY(-2px);
+}
+
+.encabezado a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #ffcc00;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.encabezado a:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .encabezado {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .encabezado a {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+}
+
+main, .imagen-fondo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 20px;
+}
+
+.formulario-cita {
+  max-width: 600px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  animation: fadeIn 1s ease;
+}
+
+.formulario-cita h2 {
+  text-align: center;
+  color: #1a1a1a;
+  font-size: 2em;
+  position: relative;
+}
+
+.formulario-cita h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #ffcc00;
+  margin: 10px auto 0 auto;
+  border-radius: 2px;
+}
+
+.formulario-cita label {
+  font-weight: 600;
+  color: #444;
+}
+
+.formulario-cita input[type="text"],
+.formulario-cita input[type="date"],
+.formulario-cita input[type="time"] {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.formulario-cita input:focus {
+  border-color: #ffcc00;
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.2);
+  outline: none;
+  background-color: #fff;
+}
+
+.formulario-cita button {
+  padding: 15px;
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.formulario-cita button:hover {
+  background-color: #ffcc00;
+  color: #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Estilos mejorados para la tabla y sección de citas */
+.contenedor-tabla {
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow-x: auto;
+}
+
+.tabla_citas {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.95rem;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tabla_citas thead {
+  position: sticky;
+  top: 0;
+}
+
+.tabla_citas thead tr {
+  background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tabla_citas th {
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 600;
+  position: relative;
+}
+
+.tabla_citas th:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tabla_citas tbody tr {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tabla_citas tbody tr:last-child {
+  border-bottom: none;
+}
+
+.tabla_citas tbody tr:nth-child(even) {
+  background-color: rgba(240, 240, 240, 0.7);
+}
+
+.tabla_citas tbody tr:hover {
+  background-color: rgba(255, 204, 0, 0.1);
+  transform: translateX(2px);
+}
+
+.tabla_citas td {
+  padding: 14px 20px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tabla_citas td:first-child {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.tabla_citas td a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  margin: 0 3px;
+  text-decoration: none;
+}
+
+.tabla_citas td a i {
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.tabla_citas td a:first-child {
+  background-color: rgba(24, 188, 156, 0.1);
+  color: #18bc9c;
+}
+
+.tabla_citas td a:first-child:hover {
+  background-color: #18bc9c;
+  color: white;
+}
+
+.tabla_citas td a:last-child {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.tabla_citas td a:last-child:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Mensajes de estado */
+.registro_exitos {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border-left: 4px solid #28a745;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.registro_exitos::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}
+
+.registro_fallido {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border-left: 4px solid #dc3545;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.registro_fallido::before {
+  content: '\f06a';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}
+
+.falta_campo {
+  background-color: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border-left: 4px solid #ffc107;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.falta_campo::before {
+  content: '\f12a';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contenedor-tabla {
+    padding: 15px;
+    margin: 20px 0;
+  }
+  
+  .tabla_citas th,
+  .tabla_citas td {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+  }
+  
+  .tabla_citas td a {
+    width: 28px;
+    height: 28px;
+    margin: 0 2px;
+  }
+  
+  .tabla_citas td a i {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenedor-tabla {
+    padding: 10px;
+  }
+  
+  .tabla_citas th {
+    display: none;
+  }
+  
+  .tabla_citas td {
+    display: block;
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .tabla_citas td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 20px;
+    width: calc(50% - 20px);
+    padding-right: 10px;
+    font-weight: 600;
+    text-align: left;
+    color: #2c3e50;
+  }
+  
+  .tabla_citas td:last-child {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .tabla_citas td a {
+    display: inline-flex;
+    float: right;
+    margin-left: 10px;
+  }
+}
+
+

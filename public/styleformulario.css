@@ -1,0 +1,132 @@
+/* Contenedor */
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 40px;
+    background-color: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+/* Animación */
+.fade-section {
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Títulos */
+h1 {
+    text-align: center;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #ffcc00;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input.form-control,
+select.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+input.form-control:focus,
+select.form-control:focus {
+    border-color: #ffcc00;
+    box-shadow: 0 0 0 3px rgba(255,204,0,0.2);
+    outline: none;
+    background-color: #fff;
+}
+
+/* Botón */
+button.btn-primary {
+    width: 100%;
+    padding: 15px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #ffcc00;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Alertas */
+.alert-success {
+    background-color: rgba(232,245,233,0.9);
+    color: #2e7d32;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.alert-error {
+    background-color: rgba(255,235,238,0.9);
+    color: #c62828;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        margin: 30px 20px;
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    input, select, button {
+        padding: 12px;
+    }
+}
