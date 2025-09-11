@@ -24,9 +24,9 @@
 
 header {
     background-color: rgba(26, 26, 26, 0.9);
-    padding: 20px 0;
+    padding: 0px 0;
     width: 100%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -126,4 +126,65 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+}
+#testimonios {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px 20px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#testimonios h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #222;
+    font-weight: bold;
+}
+
+.slider-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.slider-track {
+    display: flex;
+    width: calc(300px * 8); /* 4 testimonios x 2 (para loop infinito) */
+    animation: scrollTestimonials 30s linear infinite;
+}
+
+.testimonial {
+    flex: 0 0 300px;
+    margin: 0 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: #333;
+    font-size: 1em;
+    text-align: left;
+}
+
+.testimonial p {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.testimonial span {
+    font-weight: bold;
+    color: #555;
+}
+
+@keyframes scrollTestimonials {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }

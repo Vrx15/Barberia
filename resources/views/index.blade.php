@@ -23,6 +23,31 @@
         Ven, siéntete como en casa y luce como un campeón.
       </p>
     </section>
+    <section id="testimonios">
+  <h2>Lo que dicen nuestros clientes</h2>
+  <div class="slider-container">
+    <div class="slider-track">
+      <div class="testimonial">
+        <p>"Excelente atención y cortes impecables. ¡Volveré seguro!"</p>
+        <span>— Juan P.</span>
+      </div>
+      <div class="testimonial">
+        <p>"El ambiente es genial y los barberos súper profesionales."</p>
+        <span>— María G.</span>
+      </div>
+      <div class="testimonial">
+        <p>"Mi barba nunca ha lucido mejor. ¡Gracias El Luchón!"</p>
+        <span>— Carlos T.</span>
+      </div>
+      <div class="testimonial">
+        <p>"Servicio rápido y con estilo. 10/10."</p>
+        <span>— Andrés M.</span>
+      </div>
+    </div>
+  </div>
+  
+  
+</section>
   </main>
   </div>
 
