@@ -16,18 +16,42 @@
 </head>
 <body>
  
- <div class="franja-blanca">
+ 
 <div id="bienvenida">
     <img src="LOGO.png" alt="Barbería">
     <div class="texto">
         <h1>Barberia el Luchon</h1>
         <p>El Luchón es una barbería moderna y auténtica donde cada corte se realiza con precisión y pasión, resaltando la personalidad de cada cliente. Aquí no solo te renuevas por fuera, sino que también sales motivado por dentro.</p>
+                 
+             <a href="{{ route('formulario') }}" class="btn-reserva">Reserva tu cita</a>
+               
+            
     </div>
 </div>
 
-      <p>
-        
-      </p>
+  <!-- Sección Portafolio -->
+<section id="portafolio">
+    <h2>Nuestro Portafolio</h2>
+    <div class="grid-portafolio">
+        <div class="item">
+            <img src="modcut.jpg" alt="modcut">
+            <p>Mod Cut</p>
+        </div>
+        <div class="item">
+            <img src="taperfade.png" alt="taperfade">
+            <p>Taper fade</p>
+        </div>
+        <div class="item">
+            <img src="mullet.webp" alt="mullet">
+            <p>Mullet</p>
+        </div>
+        <div class="item">
+            <img src="buzzcut.jpeg" alt="buzzcut">
+            <p>Buzz Cut</p>
+        </div>
+    </div>
+</section>
+
     </section>
     <section id="testimonios">
   <h2>Lo que dicen nuestros clientes</h2>

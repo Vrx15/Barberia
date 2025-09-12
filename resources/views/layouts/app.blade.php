@@ -45,6 +45,11 @@
         @yield('content')
     </main>
 
+    <a href="https://www.whatsapp.com/" class="whatsapp-button" target="_blank">
+    <img src="https://thumbs.dreamstime.com/b/icono-del-logotipo-de-whatsapp-blanco-y-negro-simple-archivo-ai-ilustraci%C3%B3n-vectorial-199912365.jpg" alt="WhatsApp">
+</a>
+
+
     <!-- Footer -->
 <footer>
   <div class="footer-container">
