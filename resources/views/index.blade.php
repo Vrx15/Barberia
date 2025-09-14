@@ -28,10 +28,34 @@
             
     </div>
 </div>
+<div class="beneficios-sala">
+  <h2>Beneficios</h2>
+  <div class="beneficios-grid">
+    <div class="beneficio">
+      <img src="licor.jpg" alt="Bebidas Premium">
+      <h3>BEBIDAS PREMIUM</h3>
+      <p>Ofrecemos bebidas especiales para relajarte mientras esperas tu turno, todo incluido en tu experiencia.</p>
+    </div>
+
+    <div class="beneficio">
+      <img src="billar.jpg" alt="Entretenimiento Garantizado">
+      <h3>ENTRETENIMIENTO GARANTIZADO</h3>
+      <p>Juega billar, escucha buena música y pasa un momento agradable en un ambiente tranquilo y exclusivo.</p>
+    </div>
+
+    <div class="beneficio">
+      <img src="lugar.jpg" alt="Espacio Confortable">
+      <h3>ESPACIO CONFORTABLE</h3>
+      <p>Un lugar pensado para tu comodidad, donde cada detalle está cuidado para que tu espera sea placentera.</p>
+    </div>
+  </div>
+</div>
+
+
 
   <!-- Sección Portafolio -->
 <section id="portafolio">
-    <h2>Nuestro Portafolio</h2>
+    <h2>Favoritos</h2>
     <div class="grid-portafolio">
         <div class="item">
             <img src="modcut.jpg" alt="modcut">
