@@ -9,35 +9,35 @@ class BarberoController extends Controller
 {
     public function index()
     {
-        return Barbero::all();
+        $barberos = Barbero::all();
+        return view('barberos.index', compact('barberos'));
+    }
+
+    public function create()
+    {
+        return view('barberos.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|string|max:50',
-            'especialidad' => 'required|string|max:50',
-            'horario' => 'required|string|max:100',
-        ]);
-
-        return Barbero::create($request->all());
+        Barbero::create($request->all());
+        return redirect()->route('barberos.index');
     }
 
-    public function show($id)
+    public function edit(Barbero $barbero)
     {
-        return Barbero::findOrFail($id);
+        return view('barberos.edit', compact('barbero'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Barbero $barbero)
     {
-        $barbero = Barbero::findOrFail($id);
         $barbero->update($request->all());
-
-        return $barbero;
+        return redirect()->route('barberos.index');
     }
 
-    public function destroy($id)
+    public function destroy(Barbero $barbero)
     {
-        return Barbero::destroy($id);
+        $barbero->delete();
+        return redirect()->route('barberos.index');
     }
 }

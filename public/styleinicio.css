@@ -308,7 +308,25 @@ background-color: rgba(26, 26, 26, 0.9);
   font-size: 0.95em;
   line-height: 1.6;
   color: #f1f1f1;
+  
 }
+.label {
+    color: #ffffff; /* El texto de "¿No tienes cuenta?" en blanco */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+.label .link-registrarse {
+    color: #ffcc00; /* El "Regístrate aquí" en dorado */
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.label .link-registrarse:hover {
+    color: #e6b800; /* Un dorado más oscuro al pasar el mouse */
+}
+
 
 
 

@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\BarberoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SugerenciaController;
 use App\Http\Controllers\AuthController;
+
 
 // -------------------------
 // Página principal y vistas estáticas
@@ -25,12 +27,16 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/registrarse', [AuthController::class, 'showRegisterForm'])->name('registrarse');
+Route::post('/registrarse', [AuthController::class, 'register'])->name('registrarse.post');
+
 // -------------------------
-// CRUD de Usuarios, Barberos y Productos
+// CRUD de Usuarios, Barberos, Productos y Citas
 // -------------------------
 Route::resource('usuarios', UsuarioController::class);
 Route::resource('barberos', BarberoController::class);
 Route::resource('productos', ProductoController::class);
+Route::resource('citas', CitaController::class)->middleware('auth');
 
 // -------------------------
 // Sugerencias
@@ -38,23 +44,17 @@ Route::resource('productos', ProductoController::class);
 Route::get('/sugerencias', [SugerenciaController::class, 'create'])->name('sugerencias.create');
 Route::post('/sugerencias', [SugerenciaController::class, 'store'])->name('sugerencias.store');
 
-// -------------------------
-// Rutas protegidas por login
-// -------------------------
 Route::middleware('auth')->group(function () {
-
-    // Formulario de citas
-    Route::get('/formulario', [CitaController::class, 'create'])->name('formulario');
-    Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
-
-    // Lista de citas
-    Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
-
-    // Editar, actualizar y eliminar cita
-    Route::get('/citas/{id}/editar', [CitaController::class, 'edit'])->name('citas.edit');
-    Route::put('/citas/{id}', [CitaController::class, 'update'])->name('citas.update');
-    Route::delete('/citas/{id}', [CitaController::class, 'destroy'])->name('citas.destroy');
+Route::get('/formulario', [CitaController::class, 'create'])->name('formulario');
+Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
 });
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
 
 
 

@@ -29,6 +29,7 @@
             <label for="username" class="form-label">Nombre de usuario</label>
             <input type="text" id="username" name="username" class="form-control" required>
         </div>
+        
 
         <div class="mb-3">
             <label for="telefono" class="form-label">Teléfono</label>
@@ -43,6 +44,11 @@
         <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
+            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Registrarse</button>

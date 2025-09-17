@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}">
+
 <div class="login-container">
     <section>
         <h1>Iniciar Sesión</h1>
@@ -22,10 +24,11 @@
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <button type="submit">Ingresar</button>
+           <button type="submit" class="btn-action">Ingresar</button>
         </form>
 
-        <p class="mt-3">¿No tienes cuenta? <a href="{{ route('registrarse') }}">Regístrate aquí</a></p>
+        <p class="label">¿No tienes cuenta? <a href="{{ route('registrarse') }}" class="link-registrarse">Regístrate aquí</a></p>
+
     </section>
 </div>
 @endsection

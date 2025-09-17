@@ -10,16 +10,14 @@ class Barbero extends Model
     use HasFactory;
 
     protected $table = 'barberos';
-    protected $primaryKey = 'id';
-    public $timestamps = true;
 
     protected $fillable = [
         'nombre',
         'especialidad',
-        'horario'
+        'horario',
     ];
 
-    // 🔹 Un barbero puede tener muchas citas
+    
     public function citas()
     {
         return $this->hasMany(Cita::class, 'barbero_id');

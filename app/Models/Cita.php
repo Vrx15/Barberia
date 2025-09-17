@@ -11,21 +11,19 @@ class Cita extends Model
 
     protected $table = 'citas';
     protected $primaryKey = 'id_cita';
-    public $timestamps = true;
 
     protected $fillable = [
-    'nombre_cliente_cita',
-    'servicio',
-    'fecha',
-    'hora',
-    'barbero_id',
-    'usuario_id',
-    'estado'
-];
+        'nombre_cliente_cita',
+        'fecha',
+        'hora',
+        'barbero_id',
+        'estado',
+    ];
 
-    // 🔹 Una cita pertenece a un barbero
+    
     public function barbero()
     {
         return $this->belongsTo(Barbero::class, 'barbero_id');
     }
 }
+

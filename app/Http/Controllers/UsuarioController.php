@@ -10,48 +10,68 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        return Usuario::all();
+        $usuarios = Usuario::all();
+        return view('usuarios.index', compact('usuarios'));
+    }
+
+    public function create()
+    {
+        return view('login');
     }
 
     public function store(Request $request)
+{
+    $request->validate([
+        'username' => 'required|string|max:20',
+        'telefono' => 'required|string|max:10',
+        'email'    => 'required|email|unique:usuarios,email',
+        'password' => 'required|string|min:6|confirmed',
+    ]);
+    
+
+    Usuario::create([
+        'username' => $request->username,
+        'telefono' => $request->telefono,
+        'email'    => $request->email,
+        'password' => bcrypt($request->password), 
+        'rol'      => 'cliente',
+    ]);
+
+    return redirect()->route('login')->with('success', 'Usuario registrado correctamente.');
+    dd($request->all());
+}
+
+    public function edit(Usuario $usuario)
     {
+        return view('usuarios.edit', compact('usuario'));
+    }
+
+    public function update(Request $request, Usuario $usuario)
+    {
+        // 🔹 Validaciones
         $request->validate([
             'username' => 'required|string|max:20',
             'telefono' => 'required|string|max:10',
-            'email' => 'required|email|unique:usuarios,email',
-            'password' => 'required|string|min:6',
-            'rol' => 'string|nullable'
+            'email'    => 'required|string|email|max:50|unique:usuarios,email,' . $usuario->id,
+            'password' => 'required|string|max:20',
         ]);
 
-        $usuario = Usuario::create([
+        // 🔹 Actualizar usuario
+        $usuario->update([
             'username' => $request->username,
             'telefono' => $request->telefono,
-            'email' => $request->email,
-            'password' => $request->password, 
-            'rol' => $request->rol ?? 'cliente',
+            'email'    => $request->email,
+            'password' => $request->password,
+            'rol'      => $usuario->rol, 
         ]);
 
-        
-    return redirect()->route('login')->with('success', 'Usuario registrado correctamente. ¡Ahora inicia sesión!');
-
+        return redirect()->route('login')->with('success', 'Usuario actualizado correctamente.');
     }
 
-    public function show($id)
+    public function destroy(Usuario $usuario)
     {
-        return Usuario::findOrFail($id);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $usuario = Usuario::findOrFail($id);
-        $usuario->update($request->all());
-
-        return response()->json($usuario, 200);
-    }
-
-    public function destroy($id)
-    {
-        Usuario::destroy($id);
-        return response()->json(null, 204);
+        $usuario->delete();
+        return redirect()->route('login')->with('success', 'Usuario eliminado correctamente.');
     }
 }
+

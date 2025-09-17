@@ -126,3 +126,128 @@ footer {
     width: 35px;
     height: 35px;
 }
+/* El header en flex, con espacio entre logo/enlaces y menú usuario */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+/* Links normales alineados a la izquierda */
+.encabezado {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* El nav no debe limitar el dropdown */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;  /* importante para que el dropdown respete */
+    overflow: visible;   /* asegura que el menú no se recorte */
+}
+
+/* Avatar */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+}
+
+/* Contenedor dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Menú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;         /* justo debajo del avatar */
+    right: 0;          /* alineado con borde derecho */
+    background-color: rgba(26, 26, 26, 0.9);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 9999;
+}
+
+/* Estilo de usuario dentro del menú */
+.dropdown-content .user-name {
+    display: block;
+    padding: 8px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 8px;
+    color:#ffffff;
+}
+
+/* Botón cerrar sesión */
+.dropdown-content button {
+    background-color: #ffcc00;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+    color: #050505;
+}
+
+/* Mostrar el menú al pasar el mouse */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.logout-btn {
+    text-transform: none !important; /* evita que se ponga en mayúsculas */
+}
+
+.btn-custom {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-custom:hover {
+  color: #ffcc00;
+  transform: translateY(-2px);
+}
+
+.btn-custom::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #ffcc00;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.btn-custom:hover::after {
+  width: 100%;
+}
+
+
+
+
+
+
+
+

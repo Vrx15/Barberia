@@ -1,9 +1,5 @@
 @extends('layouts.app')
-@if(Auth::check())
-    <p>Bienvenido, {{ Auth::user()->username }}</p>
-@else
-    <p>No has iniciado sesión</p>
-@endif
+
 
 @section('content')
 <section class="fade-section">

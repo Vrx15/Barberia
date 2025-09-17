@@ -20,7 +20,8 @@ class SugerenciaController extends Controller
             'mensaje' => 'required|string',
         ]);
 
-        Sugerencia::create($request->all());
+        Sugerencia::create($request->only(['nombre', 'email', 'mensaje']));
+
 
         return redirect()->back()->with('success', 'Gracias por tu sugerencia!');
     }

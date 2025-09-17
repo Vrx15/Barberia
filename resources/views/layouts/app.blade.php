@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('styleinicio.css') }}">
     <link rel="stylesheet" href="{{ asset('stylesugerencias.css') }}">
     <link rel="stylesheet" href="{{ asset('styleregistrarse.css') }}">
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}">
     <link rel="stylesheet" href="{{ asset('stylefooter.css') }}">
     <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -20,25 +20,43 @@
 <body style="display: flex; flex-direction: column; min-height: 100vh;">
 
     <!-- Header -->
-    <header>
+<header>
+    <div class="encabezado">
+        <a href="/">
+            <img src="LOGO.png" alt="Inicio" style="height:60px;">
+        </a>
+        <a href="{{ route('formulario') }}">Agenda Ahora</a>
+        <a href="{{ url('/servicios') }}">Servicios</a>
+        <a href="{{ url('/sugerencias') }}">Sugerencias</a>
+    </div>
 
-        <div class="encabezado">
-                   <div class="encabezado">
+    <nav>
+        @guest
+        <a href="{{ route('login') }}" class="btn-custom">Iniciar sesión</a>
+        <a href="{{ route('registrarse') }}" class="btn-custom">Registrarse</a>
+        @endguest
 
-           <a href="/">
-                <img src="LOGO.png" 
-                     alt="Inicio" 
-                     style="height:60px;">
-            </a>
-            <a href="{{ route('formulario') }}">Agenda Ahora</a>
-            <a href="{{ url('/servicios') }}">Servicios</a>
-            <a href="{{ url('/registrarse') }}">Registrarse</a>
-            <a href="{{ url('/login') }}">Iniciar Sesion</a>
-            <a href="{{ url('/sugerencias') }}">Sugerencias</a>
-        </div>
-        
-        
-    </header>
+        @auth
+            <div class="dropdown">
+                <img 
+                    src="{{ Auth::user()->foto ?? asset('avatar.png') }}" 
+                    alt="Perfil" 
+                    class="avatar"
+                >
+                <div class="dropdown-content">
+                    <span class="user-name"> {{ ucfirst(Auth::user()->username) }}</span>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="logout-btn">Cerrar sesión</button>
+                    </form>
+                </div>
+            </div>
+        @endauth
+    </nav>
+</header>
+
+
+
 
     <!-- Contenido principal -->
     <main style="flex: 1;">

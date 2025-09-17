@@ -9,36 +9,35 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        return Producto::all();
+        $productos = Producto::all();
+        return view('productos.index', compact('productos'));
+    }
+
+    public function create()
+    {
+        return view('productos.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'precio' => 'required|numeric',
-            'cantidad' => 'required|integer',
-            'categoria' => 'required|string|max:50',
-            'nombre' => 'required|string|max:100',
-        ]);
-
-        return Producto::create($request->all());
+        Producto::create($request->all());
+        return redirect()->route('productos.index');
     }
 
-    public function show($id)
+    public function edit(Producto $producto)
     {
-        return Producto::findOrFail($id);
+        return view('productos.edit', compact('producto'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Producto $producto)
     {
-        $producto = Producto::findOrFail($id);
         $producto->update($request->all());
-
-        return $producto;
+        return redirect()->route('productos.index');
     }
 
-    public function destroy($id)
+    public function destroy(Producto $producto)
     {
-        return Producto::destroy($id);
+        $producto->delete();
+        return redirect()->route('productos.index');
     }
 }

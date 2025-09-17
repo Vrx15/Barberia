@@ -143,3 +143,49 @@ header {
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
 }
+.btn-action {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: #ffcc00;
+    color: black;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--sombra, 0 4px 6px rgba(0,0,0,0.2));
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-action:hover {
+    background-color: #e6b800; /* tono más oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+}
+
+.btn-action:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+.login-text {
+    color: #ffffff !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.login-text .login-link {
+    color: #ffcc00 !important;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-text .login-link:hover {
+    color: #e6b800 !important;
+}
+
+
