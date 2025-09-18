@@ -59,8 +59,26 @@ Route::post('/logout', function () {
 // admin_page//
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/crear-usuario', [UsuarioController::class, 'create'])->name('crear.usuario');
-    Route::post('/crear-usuario'. [UsuarioController::class, 'store']);
+    Route::post('/crear-usuario', [UsuarioController::class, 'store']);
 });
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
+});
+Route::get('/admin/dashboard', function () {
+    if (!Auth::check() || Auth::user()->rol !== 'admin') {
+        abort(403);
+    }
+    return view('admin.dashboard');
+})->middleware('auth')->name('admin.dashboard');
+
 
 
 

@@ -27,13 +27,13 @@ class UsuarioController extends Controller
         'email'    => 'required|email|unique:usuarios,email',
         'password' => 'required|string|min:6|confirmed',
     ]);
-    
+
 
     Usuario::create([
         'username' => $request->username,
         'telefono' => $request->telefono,
         'email'    => $request->email,
-        'password' => bcrypt($request->password), 
+        'password' => bcrypt($request->password),
         'rol'      => 'cliente',
     ]);
 
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
             'telefono' => $request->telefono,
             'email'    => $request->email,
             'password' => $request->password,
-            'rol'      => $usuario->rol, 
+            'rol'      => $usuario->rol,
         ]);
 
         return redirect()->route('login')->with('success', 'Usuario actualizado correctamente.');

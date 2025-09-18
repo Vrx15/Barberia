@@ -17,24 +17,25 @@ class AuthController extends Controller
 
     // Procesar login
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+{
+    $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Bienvenido de nuevo');
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+
+        $user = Auth::user();
+
+        if ($user->rol === 'admin') {
+            return redirect()->route('admin.dashboard')->with('success', 'Bienvenido administrador');
         }
 
-        return back()->withErrors([
-            'email' => 'Las credenciales no coinciden.',
-        ]);
+        return redirect()->route('home')->with('success', 'Bienvenido de nuevo');
     }
 
-    // Mostrar formulario de registro
-    public function showRegisterForm()
-    {
-        return view('registrarse');
-    }
+    return back()->withErrors([
+        'email' => 'Las credenciales no coinciden.',
+    ]);
+}
 
     // Procesar registro
     public function register(Request $request)
