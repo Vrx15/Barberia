@@ -68,16 +68,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home');
+    Route::get('index', function () {
+        return view('index');
+    })->name('index');
 });
-Route::get('/admin/dashboard', function () {
-    if (!Auth::check() || Auth::user()->rol !== 'admin') {
-        abort(403);
-    }
-    return view('admin.dashboard');
-})->middleware('auth')->name('admin.dashboard');
+
 
 
 

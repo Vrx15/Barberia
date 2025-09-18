@@ -1,0 +1,103 @@
+/* General */
+header {
+    background-color: rgba(26, 26, 26, 0.9);
+    padding: 20px 0;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+/* Contenedor */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: rgba(26, 26, 26, 0.9);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+
+/* Título */
+.container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+/* Formularios */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: white;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: all 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #ffcc00;
+    background-color: #fff;
+    outline: none;
+}
+
+/* Botón */
+button.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffcc00;
+    border: none;
+    color: black;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #ffcc00;
+}
+
+/* Mensajes de éxito */
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px 15px;
+    border-radius: 4px;
+    color: #155724;
+    margin-bottom: 20px;
+}
+
+/* Errores */
+.text-danger {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+    display: block;
+}
+

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -31,6 +31,7 @@
             <label for="rol">Rol</label>
             <select name="rol" id="rol" class="form-control" required>
                 <option value="usuario">Usuario</option>
+                <option value="barbero">Barbero</option>
                 <option value="admin">Administrador</option>
             </select>
         </div>
