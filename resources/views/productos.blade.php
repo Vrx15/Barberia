@@ -18,7 +18,7 @@
 <div class="contenedor-servicios">
 
     <div class="servicio">
-    <p>Máquina de Corte Profesional <br> $150.000</p>
+    <p>Máquina de Corte Profesional <br> $140.000</p>
     <img src="maquina_corte.png" alt="Máquina de Corte">
     <div class="agenda-link">
         <a href="https://wa.me/3015073385">Comprar</a>
