@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CitaController;
@@ -8,6 +7,7 @@ use App\Http\Controllers\BarberoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SugerenciaController;
 use App\Http\Controllers\AuthController;
+
 
 
 // -------------------------
@@ -55,6 +55,23 @@ Route::post('/logout', function () {
     request()->session()->regenerateToken();
     return redirect('/');
 })->name('logout');
+
+// admin_page//
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/crear-usuario', [UsuarioController::class, 'create'])->name('crear.usuario');
+    Route::post('/crear-usuario', [UsuarioController::class, 'store']);
+});
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('index', function () {
+        return view('index');
+    })->name('index');
+});
 
 
 

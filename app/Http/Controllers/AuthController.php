@@ -15,6 +15,12 @@ class AuthController extends Controller
         return view('login');
     }
 
+    // Mostrar formulario de registro
+    public function showRegisterForm()
+    {
+        return view('registrarse');
+    }
+
     // Procesar login
     public function login(Request $request)
     {
@@ -22,18 +28,19 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Bienvenido de nuevo');
+
+            $user = Auth::user();
+
+            if ($user->rol === 'admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Bienvenido administrador');
+            }
+
+            return redirect()->route('home')->with('success', 'Bienvenido de nuevo');
         }
 
         return back()->withErrors([
             'email' => 'Las credenciales no coinciden.',
         ]);
-    }
-
-    // Mostrar formulario de registro
-    public function showRegisterForm()
-    {
-        return view('registrarse');
     }
 
     // Procesar registro
@@ -48,7 +55,7 @@ class AuthController extends Controller
         ]);
 
         $usuario = Usuario::create([
-            'username'   => $request->nombre,
+            'username'   => $request->username,
             'email'    => $request->email,
             'telefono' => $request->telefono,
             'rol'      => 'cliente',
@@ -70,6 +77,7 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Sesión cerrada correctamente');
     }
 }
+
 
 
 

@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="{{ asset('styleregistrarse.css') }}">
     <link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}">
     <link rel="stylesheet" href="{{ asset('stylefooter.css') }}">
+    
     <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Font Awesome CDN -->
 
 
-    
+
 </head>
 <body style="display: flex; flex-direction: column; min-height: 100vh;">
 
@@ -38,9 +39,9 @@
 
         @auth
             <div class="dropdown">
-                <img 
-                    src="{{ Auth::user()->foto ?? asset('avatar.png') }}" 
-                    alt="Perfil" 
+                <img
+                    src="{{ Auth::user()->foto ?? asset('avatar.png') }}"
+                    alt="Perfil"
                     class="avatar"
                 >
                 <div class="dropdown-content">
@@ -80,17 +81,17 @@
       <h4>Contacto</h4>
       <p>+57 314 336 0128</p>
       <p>barberiaeluchon@gmail.com</p>
-      
+
     </div>
 
     <div class="footer-links">
       <h4>Barberias</h4>
       <ul>
-        
+
         <li><a href="https://www.google.com/maps/place/SENA+-+Centro+De+Servicios+Financieros/@4.651881,-74.067833,17z/data=!3m1!4b1!4m6!3m5!1s0x8e3f9a45d9f1654b:0x3d69138572d157f2!8m2!3d4.6518757!4d-74.0629621!16s%2Fg%2F1tg51gp_?entry=ttu&g_ep=EgoyMDI1MDkwOC4wIKXMDSoASAFQAw%3D%3D">Kr 13 #65-10, Bogotá</a></li>
         <li><a href="https://www.google.com/maps/place/Sena+Complejo+de+Paloquemao/@4.65625,-74.081989,14.25z/data=!4m10!1m2!2m1!1ssena!3m6!1s0x8e3f996f759820ad:0x8064dc77d651db18!8m2!3d4.6166055!4d-74.0915012!15sCgRzZW5hkgEKdW5pdmVyc2l0eaoBOQoKL20vMGI3NzkwaxABMh8QASIbLGKNx5kGIGYtiUxCtfbJE2oEdhouQETY_OgzMggQAiIEc2VuYeABAA!16s%2Fg%2F11b7hcbqkm?entry=ttu&g_ep=EgoyMDI1MDkwOC4wIKXMDSoASAFQAw%3D%3D">Cl. 15 #42, Bogotá</a></li>
         <li><a href="https://www.google.com/maps/place/SENA+SALITRE/@4.6548112,-74.0837934,14.25z/data=!4m10!1m2!2m1!1ssena!3m6!1s0x8e3f9b070b5f0ff7:0xd2af7f8cc2875af0!8m2!3d4.6654889!4d-74.0837482!15sCgRzZW5hWgYiBHNlbmGSARBlZHVjYXRpb25fY2VudGVyqgE5CgovbS8wYjc3OTBrEAEyHxABIhssYo3HmQYgZi2JTEK19skTagR2Gi5ARNj86DMyCBACIgRzZW5h4AEA!16s%2Fg%2F11s9dll71c?entry=ttu&g_ep=EgoyMDI1MDkwOC4wIKXMDSoASAFQAw%3D%3D">Cra. 57c #64-29, Bogotá</a></li>
-        
+
       </ul>
     </div>
 
@@ -112,7 +113,7 @@
 
   <div class="footer-bottom">
     <p>© 2025 Barbería El Luchón. Todos los derechos reservados.</p>
-    
+
   </div>
 </footer>
 
