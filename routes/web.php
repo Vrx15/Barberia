@@ -13,6 +13,9 @@ use App\Http\Controllers\AuthController;
 // -------------------------
 // Página principal y vistas estáticas
 // -------------------------
+
+
+//
 Route::get('/', function () {
     return view('index');
 })->name('home');
@@ -48,6 +51,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/formulario', [CitaController::class, 'create'])->name('formulario');
 Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
 });
+
+Route::view('/productos', 'productos')->name('productos');
 
 Route::post('/logout', function () {
     Auth::logout();
