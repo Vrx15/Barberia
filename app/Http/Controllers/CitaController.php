@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Cita;
 use App\Models\Barbero;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CitaConfirmacion;
 
 class CitaController extends Controller
 {
     public function index()
     {
-        $citas = Cita::with('barbero')->get();
+        $citas = Cita::with('barbero')->get(); // Arreglado el 'relations:'
         return view('citas.index', compact('citas'));
     }
 
@@ -28,17 +30,33 @@ class CitaController extends Controller
             'hora' => 'required',
             'barbero_id' => 'nullable|exists:barberos,id',
             'nombre_cliente_cita' => 'required|string|max:255',
+            'email' => 'required|email',
         ]);
 
-        Cita::create([
+        // Crear y guardar la cita
+        $cita = Cita::create([
             'servicio' => $request->servicio,
             'fecha' => $request->fecha,
             'hora' => $request->hora,
             'barbero_id' => $request->barbero_id,
             'nombre_cliente_cita' => $request->nombre_cliente_cita,
+            'email' => $request->email,
         ]);
 
-        return redirect('/')->with('success', 'Cita agendada correctamente');
+        // Lista de correos que recibirán el correo de confirmación
+        $destinatarios = [
+            '',       // ✅ Puedes poner aquí los correos que quieras
+            'correo2@gmail.com',
+            'correo3@gmail.com',
+            $cita->email,              // ✅ El correo del cliente que llenó el formulario
+        ];
+
+        // Enviar correo a todos los destinatarios
+        foreach ($destinatarios as $email) {
+            Mail::to($email)->send(new CitaConfirmacion($cita));
+        }
+
+        return redirect('/')->with('success', 'Cita agendada correctamente y correos enviados');
     }
 
     public function edit(Cita $cita)
@@ -55,6 +73,7 @@ class CitaController extends Controller
             'hora' => 'required',
             'barbero_id' => 'nullable|exists:barberos,id',
             'nombre_cliente_cita' => 'required|string|max:255',
+            'email' => 'required|email',
         ]);
 
         $cita->update([
@@ -63,6 +82,7 @@ class CitaController extends Controller
             'hora' => $request->hora,
             'barbero_id' => $request->barbero_id,
             'nombre_cliente_cita' => $request->nombre_cliente_cita,
+            'email' => $request->email,
         ]);
 
         return redirect()->route('citas.index')->with('success', 'Cita actualizada correctamente');
