@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&family=Inter:wght@400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: url('barberia fondo.jpg'); /* coloca la imagen en public/ */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #f1f1f1;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Oscurecer fondo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    z-index: -1;
+}
+
+/* ====== SECCIÓN TIENDA ====== */
+#servicios {
+    background: rgba(26, 26, 26, 0.9);
+    width: 90%;
+    margin: 40px auto;
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+#servicios h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+    margin-bottom: 35px;
+    color: #ffcc00;
+}
+
+/* ====== GRID DE PRODUCTOS ====== */
+.contenedor-servicios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+.servicio {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.servicio:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* Texto de cada producto */
+.servicio p {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #f1f1f1;
+}
+
+/* Imagen de cada producto */
+.servicio img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Botón Comprar */
+.agenda-link a {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #FFD700;
+    color: #000;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.agenda-link a:hover {
+    background-color: #e6b800;
+    transform: scale(1.05);
+}
+
