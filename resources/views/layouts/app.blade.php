@@ -29,6 +29,7 @@
         <a href="{{ route('formulario') }}">Agenda Ahora</a>
         <a href="{{ url('/servicios') }}">Servicios</a>
         <a href="{{ url('/sugerencias') }}">Sugerencias</a>
+        <a href="{{ url('/productos') }}">Productos</a>
     </div>
 
     <nav>
