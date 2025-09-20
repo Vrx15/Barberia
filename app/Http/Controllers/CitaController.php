@@ -22,8 +22,23 @@ class CitaController extends Controller
 
     public function store(Request $request)
     {
-        Cita::create($request->all());
-        return redirect()->route('citas.index');
+        $request->validate([
+            'servicio' => 'required|string',
+            'fecha' => 'required|date',
+            'hora' => 'required',
+            'barbero_id' => 'nullable|exists:barberos,id',
+            'nombre_cliente_cita' => 'required|string|max:255',
+        ]);
+
+        Cita::create([
+            'servicio' => $request->servicio,
+            'fecha' => $request->fecha,
+            'hora' => $request->hora,
+            'barbero_id' => $request->barbero_id,
+            'nombre_cliente_cita' => $request->nombre_cliente_cita,
+        ]);
+
+        return redirect('/')->with('success', 'Cita agendada correctamente');
     }
 
     public function edit(Cita $cita)
@@ -34,21 +49,28 @@ class CitaController extends Controller
 
     public function update(Request $request, Cita $cita)
     {
-        $cita->update($request->all());
-        return redirect()->route('citas.index');
+        $request->validate([
+            'servicio' => 'required|string',
+            'fecha' => 'required|date',
+            'hora' => 'required',
+            'barbero_id' => 'nullable|exists:barberos,id',
+            'nombre_cliente_cita' => 'required|string|max:255',
+        ]);
+
+        $cita->update([
+            'servicio' => $request->servicio,
+            'fecha' => $request->fecha,
+            'hora' => $request->hora,
+            'barbero_id' => $request->barbero_id,
+            'nombre_cliente_cita' => $request->nombre_cliente_cita,
+        ]);
+
+        return redirect()->route('citas.index')->with('success', 'Cita actualizada correctamente');
     }
 
     public function destroy(Cita $cita)
     {
         $cita->delete();
-        return redirect()->route('citas.index');
+        return redirect()->route('citas.index')->with('success', 'Cita eliminada correctamente');
     }
 }
-
-
-
-
-
-
-
-

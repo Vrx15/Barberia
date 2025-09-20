@@ -42,6 +42,11 @@
                 @endforeach
             </select>
         </div>
+        <div class="mb-3">
+    <label for="nombre_cliente_cita">Nombre del cliente</label>
+    <input type="text" id="nombre_cliente_cita" name="nombre_cliente_cita" class="form-control" required>
+    </div>
+
 
         <button type="submit" class="btn btn-primary">Agendar cita</button>
     </form>
