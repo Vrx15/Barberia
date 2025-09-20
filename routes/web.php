@@ -7,15 +7,11 @@ use App\Http\Controllers\BarberoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SugerenciaController;
 use App\Http\Controllers\AuthController;
-
-
+use App\Http\Controllers\DashboardController;
 
 // -------------------------
 // Página principal y vistas estáticas
 // -------------------------
-
-
-//
 Route::get('/', function () {
     return view('index');
 })->name('home');
@@ -52,8 +48,6 @@ Route::get('/formulario', [CitaController::class, 'create'])->name('formulario')
 Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
 });
 
-Route::view('/productos', 'productos')->name('productos');
-
 Route::post('/logout', function () {
     Auth::logout();
     request()->session()->invalidate();
@@ -66,11 +60,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/crear-usuario', [UsuarioController::class, 'create'])->name('crear.usuario');
     Route::post('/crear-usuario', [UsuarioController::class, 'store']);
 });
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
-});
+//Route::middleware(['auth', 'role:admin'])->group(function () {
+//    Route::get('/admin/dashboard', function () {
+//        return view('admin.dashboard');
+//    })->name('admin.dashboard');
+//});
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('index', function () {

@@ -6,10 +6,20 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
+    /**
+     * Global HTTP middleware stack.
+     *
+     * @var array
+     */
     protected $middleware = [
-        // Puedes dejarlo vacío o agregar middlewares globales aquí
+        // middlewares globales (si los tienes)
     ];
 
+    /**
+     * The application's route middleware groups.
+     *
+     * @var array
+     */
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
@@ -26,9 +36,18 @@ class Kernel extends HttpKernel
         ],
     ];
 
+    /**
+     * The application's route middleware.
+     *
+     * These middleware may be assigned to groups or used individually.
+     *
+     * @var array
+     */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         // Aquí registra tu middleware de roles
+        
         'role' => \App\Http\Middleware\RoleMiddleware::class,
+        // otros middlewares...
     ];
 }

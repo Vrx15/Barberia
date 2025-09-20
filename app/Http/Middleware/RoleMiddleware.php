@@ -8,13 +8,35 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, $role)
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  string|null  $role
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next, $role = null)
     {
-        if (!Auth::check() || Auth::user()->rol !== $role) {
-            abort(403, 'No tienes permiso para acceder a esta página.');
+        $user = $request->user();
+
+        if (! $user) {
+            // No autenticado
+            return redirect()->route('login');
+        }
+
+        // Si usas spatie/permission
+        if (method_exists($user, 'hasRole')) {
+            if (! $user->hasRole($role)) {
+                abort(403, 'No autorizado');
+            }
+        } else {
+            // Ejemplo simple: suponiendo que tienes un campo `role` en la tabla users
+            if ($user->role !== $role) {
+                abort(403, 'No autorizado');
+            }
         }
 
         return $next($request);
     }
 }
-
