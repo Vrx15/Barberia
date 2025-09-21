@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 <section class="fade-section">
     <h1>Agenda tu cita</h1>
@@ -12,6 +11,7 @@
     <form action="{{ route('citas.store') }}" method="POST">
         @csrf
 
+        {{-- Selección del servicio --}}
         <div class="mb-3">
             <label for="servicio">Servicio</label>
             <select name="servicio" id="servicio" class="form-control" required>
@@ -23,32 +23,31 @@
             </select>
         </div>
 
+        {{-- Fecha y hora en un solo input datetime-local --}}
         <div class="mb-3">
-            <label for="fecha">Fecha</label>
-            <input type="date" id="fecha" name="fecha" class="form-control" required>
+            <label for="fecha_hora">Fecha y hora</label>
+            <input 
+                type="datetime-local" 
+                id="fecha_hora" 
+                name="fecha_hora" 
+                class="form-control" 
+                required 
+                min="{{ date('Y-m-d\TH:i') }}">
         </div>
 
-        <div class="mb-3">
-            <label for="hora">Hora</label>
-            <input type="time" id="hora" name="hora" class="form-control" required>
-        </div>
-
+        {{-- Selección de barbero --}}
         <div class="mb-3">
             <label for="barbero_id">Barbero (opcional)</label>
             <select name="barbero_id" id="barbero_id" class="form-control">
                 <option value="">Selecciona un barbero</option>
                 @foreach($barberos as $barbero)
-                    <option value="{{ $barbero->id }}">{{ $barbero->nombre }}</option>
+                    <option value="{{ $barbero->id }}">{{ $barbero->username }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
-    <label for="nombre_cliente_cita">Nombre del cliente</label>
-    <input type="text" id="nombre_cliente_cita" name="nombre_cliente_cita" class="form-control" required>
-    </div>
-
 
         <button type="submit" class="btn btn-primary">Agendar cita</button>
     </form>
 </section>
 @endsection
+

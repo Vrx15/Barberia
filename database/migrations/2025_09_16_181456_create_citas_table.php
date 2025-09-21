@@ -11,17 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('citas', function (Blueprint $table) {
-        $table->id('id_cita'); 
-        $table->string('nombre_cliente_cita', 30);
-        $table->dateTime('fecha', 6);
-        $table->time('hora', 6);
-        $table->unsignedBigInteger('barbero_id')->nullable();
-        $table->string('estado', 20)->default('pendiente');
-        $table->timestamps();
+        Schema::create('citas', function (Blueprint $table) {
+            $table->id('id_cita'); 
+            
+            // Relación con el cliente que creó la cita
+            $table->unsignedBigInteger('usuario_id'); 
+            
+            // Relación con el barbero asignado (opcional)
+            $table->unsignedBigInteger('barbero_id')->nullable();
 
-        
-        $table->foreign('barbero_id')->references('id')->on('barberos')->onDelete('set null');
+            $table->dateTime('fecha_hora'); // fecha + hora en una sola columna
+            $table->string('servicio', 100);
+            $table->string('estado', 20)->default('pendiente');
+            $table->string('email')->nullable();
+            $table->timestamps();
+
+            // 🔗 Relaciones con usuarios
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreign('barbero_id')->references('id')->on('usuarios')->onDelete('set null');
         });
     }
 
@@ -33,3 +40,4 @@ return new class extends Migration
         Schema::dropIfExists('citas');
     }
 };
+

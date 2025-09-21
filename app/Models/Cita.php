@@ -13,17 +13,25 @@ class Cita extends Model
     protected $primaryKey = 'id_cita';
 
     protected $fillable = [
-        'nombre_cliente_cita',
-        'fecha',
-        'hora',
+        'usuario_id',
         'barbero_id',
+        'fecha_hora',
+        'servicio',
         'estado',
+        'email',
     ];
 
-    
+    // Relación con el cliente (usuario normal)
+    public function cliente()
+    {
+        return $this->belongsTo(User::class, 'usuario_id');
+    }
+
+    // Relación con el barbero (usuario con rol barbero)
     public function barbero()
     {
-        return $this->belongsTo(Barbero::class, 'barbero_id');
+        return $this->belongsTo(User::class, 'barbero_id');
     }
 }
+
 
