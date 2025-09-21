@@ -26,37 +26,44 @@ class CitaController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'servicio' => 'required|string',
-            'fecha_hora' => 'required|date',
-            'barbero_id' => 'nullable|exists:usuarios,id',
-        ]);
+{
+    $request->validate([
+        'servicio' => 'required|string',
+        'fecha_hora' => 'required|date',
+        'barbero_id' => 'nullable|exists:usuarios,id',
+    ]);
 
-        // Crear y guardar la cita
-        $cita = Cita::create([
-            'usuario_id' => Auth::id(), // cliente logueado
-            'barbero_id' => $request->barbero_id,
-            'servicio'   => $request->servicio,
-            'fecha_hora' => $request->fecha_hora,
-            'estado'     => 'pendiente',
-            'email'      => Auth::user()->email,
-        ]);
+    // Crear y guardar la cita
+    $cita = Cita::create([
+        'usuario_id' => Auth::id(), // cliente logueado
+        'barbero_id' => $request->barbero_id,
+        'servicio'   => $request->servicio,
+        'fecha_hora' => $request->fecha_hora,
+        'estado'     => 'pendiente',
+        'email'      => Auth::user()->email,
+    ]);
+    $cita->load(['cliente', 'barbero']);
 
-        // Lista de correos
-        $destinatarios = [
-            'correo2@gmail.com',
-            'correo3@gmail.com',
-            Auth::user()->email, // correo del cliente
-        ];
+    // Lista de correos
+    $destinatarios = [
+        
+        Auth::user()->email, // correo del cliente
+    ];
 
-        // Enviar correos
-        foreach ($destinatarios as $email) {
-            Mail::to($email)->send(new CitaConfirmacion($cita));
-        }
-
-        return redirect('/')->with('success', 'Cita agendada correctamente y correos enviados');
+    // Enviar correos dentro de un try/catch
+try {
+    foreach ($destinatarios as $email) {
+        Mail::to($email)->send(new CitaConfirmacion($cita));
     }
+} catch (\Exception $e) {
+    \Log::error('Error enviando correo de confirmación: ' . $e->getMessage());
+}
+
+
+    // Redirigir al index con mensaje de éxito
+    return redirect('/')
+        ->with('success', 'Tu cita se reservó con éxito.');
+}
 
     public function edit(Cita $cita)
     {

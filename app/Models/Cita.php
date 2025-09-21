@@ -24,13 +24,13 @@ class Cita extends Model
     // Relación con el cliente (usuario normal)
     public function cliente()
     {
-        return $this->belongsTo(User::class, 'usuario_id');
+        return $this->belongsTo(Usuario::class, 'usuario_id');
     }
 
     // Relación con el barbero (usuario con rol barbero)
     public function barbero()
     {
-        return $this->belongsTo(User::class, 'barbero_id');
+        return $this->belongsTo(Usuario::class, 'barbero_id');
     }
 }
 
