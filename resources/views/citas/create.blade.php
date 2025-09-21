@@ -36,15 +36,15 @@
         </div>
 
         {{-- Selección de barbero --}}
-        <div class="mb-3">
-            <label for="barbero_id">Barbero (opcional)</label>
-            <select name="barbero_id" id="barbero_id" class="form-control">
-                <option value="">Selecciona un barbero</option>
-                @foreach($barberos as $barbero)
-                    <option value="{{ $barbero->id }}">{{ $barbero->username }}</option>
-                @endforeach
-            </select>
-        </div>
+<div class="mb-3">
+    <label for="barbero_id">Barbero (opcional)</label>
+    <select name="barbero_id" id="barbero_id" class="form-control">
+        <option value="">Selecciona un barbero</option>
+        @foreach($barberos as $barbero)
+            <option value="{{ $barbero->id }}">{{ $barbero->username }}</option>
+        @endforeach
+    </select>
+</div>
 
         <button type="submit" class="btn btn-primary">Agendar cita</button>
     </form>
