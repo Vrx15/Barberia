@@ -61,18 +61,68 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/crear-usuario', [UsuarioController::class, 'registerFromAdmin'])->name('crear.usuario.post');
     
 });
+
 //Route::middleware(['auth', 'role:admin'])->group(function () {
 //    Route::get('/admin/dashboard', function () {
 //        return view('admin.dashboard');
 //    })->name('admin.dashboard');
 //});
+
+
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('index', function () {
-        return view('index');
+       return view('index');
     })->name('index');
 });
+
+//barbero
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/barbero/dashboard', function () {
+        if (auth()->user()->rol !== 'barbero') {
+            abort(403, 'No autorizado');
+        }
+        return view('barbero.dashboard');
+    })->name('barbero.dashboard');
+});
+
+//Productos
+
+Route::resource('productos', ProductoController::class);
+// Productos para usuarios clientes
+Route::middleware('auth')->group(function () {
+    Route::get('/productos', [ProductoController::class, 'indexCliente'])->name('productos.cliente');
+});
+
+
+Route::prefix('barbero')->name('barbero.')->group(function () {
+    // Listar productos
+    Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
+
+    // Formulario para crear producto
+    Route::get('/productos/crear', [ProductoController::class, 'create'])->name('productos.create');
+    Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
+
+    // Formulario para editar producto
+    Route::get('/productos/{producto}/editar', [ProductoController::class, 'edit'])->name('productos.edit');
+    Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
+
+    // Eliminar producto
+    Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+});
+
+
+
+
+
+
+
+
+
+
 
 
 

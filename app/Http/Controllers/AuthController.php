@@ -26,26 +26,29 @@ class AuthController extends Controller
 }
 
     // Procesar login
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        $user = Auth::user();
+        
 
-            $user = Auth::user();
-
-            if ($user->rol === 'admin') {
-                return redirect()->route('admin.dashboard')->with('success', 'Bienvenido administrador');
-            }
-
-            return redirect()->route('home')->with('success', 'Bienvenido de nuevo');
+        if ($user->rol === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->rol === 'barbero') {
+            return redirect()->route('barbero.dashboard');
+        } else {
+            return redirect()->route('index');
         }
-
-        return back()->withErrors([
-            'email' => 'Las credenciales no coinciden.',
-        ]);
     }
+
+    return back()->withErrors([
+        'email' => 'Las credenciales no coinciden.',
+    ]);
+}
+
 
     // Procesar registro
     public function register(Request $request)

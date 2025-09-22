@@ -18,6 +18,7 @@ return new class extends Migration
         $table->string('email', 50)->unique();
         $table->string('password', 255);
         $table->enum('rol', ['cliente', 'admin', 'barbero'])->default('cliente');
+        $table->rememberToken();
         $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class RoleMiddleware
      * @param  string|null  $role
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $role = null)
+    public function handle(Request $request, Closure $next, $rol = null)
     {
         $user = $request->user();
 
@@ -27,12 +27,12 @@ class RoleMiddleware
 
         // Si usas spatie/permission
         if (method_exists($user, 'hasRole')) {
-            if (! $user->hasRole($role)) {
+            if (! $user->hasRole($rol)) {
                 abort(403, 'No autorizado');
             }
         } else {
             // Ejemplo simple: suponiendo que tienes un campo `role` en la tabla users
-            if ($user->role !== $role) {
+            if ($user->rol !== $rol) {
                 abort(403, 'No autorizado');
             }
         }
