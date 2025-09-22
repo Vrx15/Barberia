@@ -20,6 +20,10 @@ class AuthController extends Controller
     {
         return view('registrarse');
     }
+    public function showRegisterFormAdmin()
+{
+    return view('admin.dashboard'); // Vista específica para admin
+}
 
     // Procesar login
     public function login(Request $request)
@@ -61,11 +65,33 @@ class AuthController extends Controller
             'rol'      => 'cliente',
             'password' => Hash::make($request->password),
         ]);
+        
+        
 
         Auth::login($usuario);
 
         return redirect('/')->with('success', 'Registro exitoso. Bienvenido!');
     }
+    public function registerFromAdmin(Request $request)
+{
+    $request->validate([
+        'username' => 'required|string|max:20',
+        'email' => 'required|string|email|max:255|unique:usuarios',
+        'password' => 'required|string|min:6|confirmed',
+        'telefono' => 'nullable|string|max:20',
+        'rol' => 'required|in:cliente,barbero,admin',
+    ]);
+
+    Usuario::create([
+        'username' => $request->username,
+        'email' => $request->email,
+        'telefono' => $request->telefono,
+        'rol' => $request->rol,
+        'password' => Hash::make($request->password),
+    ]);
+
+    return redirect()->route('admin.dashboard')->with('success', 'Usuario creado correctamente');
+}
 
     // Logout
     public function logout(Request $request)
@@ -77,6 +103,7 @@ class AuthController extends Controller
         return redirect('/')->with('success', 'Sesión cerrada correctamente');
     }
 }
+
 
 
 

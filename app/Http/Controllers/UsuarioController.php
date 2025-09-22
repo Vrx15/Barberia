@@ -18,6 +18,10 @@ class UsuarioController extends Controller
     {
         return view('login');
     }
+    public function createFromAdmin()
+{
+    return view('admin.usuarios.create');
+}
 
     public function store(Request $request)
 {

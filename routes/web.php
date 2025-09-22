@@ -17,7 +17,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::view('/servicios', 'servicios')->name('servicios');
-Route::view('/registrarse', 'registrarse')->name('registrarse');
+
 
 // -------------------------
 // Login / Logout
@@ -57,8 +57,9 @@ Route::post('/logout', function () {
 
 // admin_page//
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/crear-usuario', [UsuarioController::class, 'create'])->name('crear.usuario');
-    Route::post('/crear-usuario', [UsuarioController::class, 'store']);
+    Route::get('/crear-usuario', [UsuarioController::class, 'showRegisterFormAdmin'])->name('crear.usuario');
+    Route::post('/crear-usuario', [UsuarioController::class, 'registerFromAdmin'])->name('crear.usuario.post');
+    
 });
 //Route::middleware(['auth', 'role:admin'])->group(function () {
 //    Route::get('/admin/dashboard', function () {
