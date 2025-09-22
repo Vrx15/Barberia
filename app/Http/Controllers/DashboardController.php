@@ -10,4 +10,11 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard');
     }
+     public function barberoDashboard()
+    {
+        return view('barbero.dashboard'); // Asegúrate de crear esta vista
+    }
 }
+
+ // Dashboard exclusivo para barbero
+

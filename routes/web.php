@@ -60,17 +60,30 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/crear-usuario', [UsuarioController::class, 'create'])->name('crear.usuario');
     Route::post('/crear-usuario', [UsuarioController::class, 'store']);
 });
+
 //Route::middleware(['auth', 'role:admin'])->group(function () {
 //    Route::get('/admin/dashboard', function () {
 //        return view('admin.dashboard');
 //    })->name('admin.dashboard');
 //});
+
+
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('index', function () {
-        return view('index');
+       return view('index');
     })->name('index');
+});
+
+//barbero
+
+Route::get('/barbero/dashboard', [DashboardController::class, 'barberoDashboard'])->name('barbero.dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('barberoDashboard', function () {
+       return view('barberoDashboard');
+    })->name('barberoDashboard');
 });
 
 
