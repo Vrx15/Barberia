@@ -1,0 +1,15 @@
+.table {
+    background-color: white !important;
+    color: black !important;
+}
+
+.table th,
+.table td {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid #dee2e6;
+}
+
+.table-striped tbody tr {
+    background-color: white !important;
+}

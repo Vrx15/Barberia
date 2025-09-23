@@ -16,7 +16,7 @@ class RoleMiddleware
      * @param  string|null  $role
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $rol = null)
+    public function handle(Request $request, Closure $next, $role = null)
     {
         $user = $request->user();
 
@@ -25,18 +25,19 @@ class RoleMiddleware
             return redirect()->route('login');
         }
 
-        // Si usas spatie/permission
-        if (method_exists($user, 'hasRole')) {
-            if (! $user->hasRole($rol)) {
-                abort(403, 'No autorizado');
-            }
-        } else {
-            // Ejemplo simple: suponiendo que tienes un campo `role` en la tabla users
-            if ($user->rol !== $rol) {
-                abort(403, 'No autorizado');
-            }
+        if ($user->rol !== $role) {  
+            abort(403, 'No autorizado');
         }
 
         return $next($request);
     }
+    protected $routeMiddleware = [
+    'auth' => \App\Http\Middleware\Authenticate::class,
+    'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+    // ... otros que tengas ...
+    
+    // 🔥 AGREGA ESTA LÍNEA:
+    'role' => \App\Http\Middleware\RoleMiddleware::class,
+];
+
 }

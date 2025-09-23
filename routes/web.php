@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SugerenciaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Http\Request;
 
 // -------------------------
 // Página principal y vistas estáticas
@@ -17,7 +18,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::view('/servicios', 'servicios')->name('servicios');
-
+Route::view('/registrarse', 'registrarse')->name('registrarse');
 
 // -------------------------
 // Login / Logout
@@ -56,12 +57,19 @@ Route::post('/logout', function () {
 })->name('logout');
 
 // admin_page//
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/crear-usuario', [UsuarioController::class, 'showRegisterFormAdmin'])->name('crear.usuario');
-    Route::post('/crear-usuario', [UsuarioController::class, 'registerFromAdmin'])->name('crear.usuario.post');
+// Agrega esta ruta dentro del grupo de admin
+// QUITA 'role:admin' temporalmente:
+// Vuelve a tu código original pero SIN el middleware 'role'
+Route::middleware(['auth'])->group(function () {
+    // Ruta para crear usuario
+    Route::get('/admin/crear-usuario', [UsuarioController::class, 'create'])->name('admin.crear.usuario');
+    Route::post('/admin/crear-usuario', [UsuarioController::class, 'store'])->name('admin.usuario.store');
     
+    // 🔥 NUEVA RUTA para listar usuarios
+    Route::get('/admin/lista-usuarios', [UsuarioController::class, 'index'])->name('admin.lista.usuarios');
 });
 
+// Y agrega esta verificación DIRECTAMENTE en el controlador
 //Route::middleware(['auth', 'role:admin'])->group(function () {
 //    Route::get('/admin/dashboard', function () {
 //        return view('admin.dashboard');
@@ -77,52 +85,18 @@ Route::middleware('auth')->group(function () {
     })->name('index');
 });
 
+// Registro
+Route::get('/registrarse', [AuthController::class, 'showRegisterForm'])->name('registrarse');
+Route::post('/registrarse', [AuthController::class, 'register'])->name('registrarse.post');
 //barbero
 
+Route::get('/barbero/dashboard', [DashboardController::class, 'barberoDashboard'])->name('barbero.dashboard');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/barbero/dashboard', function () {
-        if (auth()->user()->rol !== 'barbero') {
-            abort(403, 'No autorizado');
-        }
-        return view('barbero.dashboard');
-    })->name('barbero.dashboard');
-});
-
-//Productos
-
-Route::resource('productos', ProductoController::class);
-// Productos para usuarios clientes
 Route::middleware('auth')->group(function () {
-    Route::get('/productos', [ProductoController::class, 'indexCliente'])->name('productos.cliente');
+    Route::get('barberoDashboard', function () {
+       return view('barberoDashboard');
+    })->name('barberoDashboard');
 });
-
-
-Route::prefix('barbero')->name('barbero.')->group(function () {
-    // Listar productos
-    Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
-
-    // Formulario para crear producto
-    Route::get('/productos/crear', [ProductoController::class, 'create'])->name('productos.create');
-    Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
-
-    // Formulario para editar producto
-    Route::get('/productos/{producto}/editar', [ProductoController::class, 'edit'])->name('productos.edit');
-    Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
-
-    // Eliminar producto
-    Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
-});
-
-
-
-
-
-
-
-
-
-
 
 
 

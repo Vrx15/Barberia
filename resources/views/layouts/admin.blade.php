@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}">
     <link rel="stylesheet" href="{{ asset('stylefooter.css') }}">
     <link href="{{ asset('styleadmin.css') }}" rel="stylesheet">
+    <link href="{{ asset('styleform.css')}}" rel="stylesheet">
 
     <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
