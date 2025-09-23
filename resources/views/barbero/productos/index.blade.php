@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="mb-4">Productos</h1>
 
-    <a href="{{ route('productos.create') }}" class="btn btn-primary mb-3">Agregar Producto</a>
+    <a href="{{ route('barbero.productos.create') }}" class="btn btn-primary mb-3">Agregar Producto</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -28,9 +28,14 @@
                     <td>{{ $producto->precio }}</td>
                     <td>{{ $producto->cantidad }}</td>
                     <td>
-                        <a href="{{ route('barbero.productos.edit', $producto) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{ route('barbero.productos.edit', $producto->id_producto) }}" class="btn btn-sm btn-warning">
+    Editar
+</a>
 
-                        <form action="{{ route('barbero.productos.destroy', $producto->id) }}" method="POST" style="display:inline;">
+
+
+                        <form action="{{ route('barbero.productos.destroy', $producto->id_producto) }}" method="POST" style="display:inline;">
+
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger"

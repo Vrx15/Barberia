@@ -18,4 +18,8 @@ class Producto extends Model
         'categoria',
         'nombre',
     ];
+    public function getRouteKeyName()
+{
+    return 'id_producto';
+}
 }

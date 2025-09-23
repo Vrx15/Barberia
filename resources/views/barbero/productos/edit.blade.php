@@ -13,7 +13,7 @@
     </div>
 @endif
 
-<form action="{{ route('productos.update', $producto->id) }}" method="POST">
+<form action="{{ route('barbero.productos.update', $producto->id_producto) }}" method="POST">
     @csrf
     @method('PUT')
 
