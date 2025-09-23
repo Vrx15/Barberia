@@ -1,0 +1,92 @@
+/* ESTILOS PARA EL DROPDOWN */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.user-name {
+    padding: 10px 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+    color: #333;
+    display: block;
+}
+
+/* BOTONES DEL DROPDOWN */
+.dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+/* BOTÓN HISTORIAL COMO BOTÓN NEON */
+.historial-btn {
+    background: #000000 !important;
+    color: #D4AF37 !important;
+    border: 2px solid #D4AF37 !important;
+    margin: 8px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-shadow: 0 0 5px #D4AF37;
+    box-shadow: 0 0 10px #D4AF37, inset 0 0 3px #D4AF37;
+}
+
+.historial-btn:hover {
+    background: #D4AF37 !important;
+    color: #000000 !important;
+    text-shadow: none;
+    box-shadow: 0 0 15px #D4AF37, 0 0 20px #FFD700;
+    transform: translateY(-1px);
+}
+
+/* BOTÓN CERRAR SESIÓN */
+.logout-btn {
+    color: #dc3545;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 5px;
+}
+
+.logout-btn:hover {
+    background: #f8f9fa;
+    color: #c82333;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #D4AF37;
+    transition: all 0.3s ease;
+}
+
+.avatar:hover {
+    border-color: #FFD700;
+}
