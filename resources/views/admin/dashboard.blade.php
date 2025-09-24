@@ -58,8 +58,8 @@
 
         <button type="submit" class="btn btn-primary mt-3">Registrar</button>
         <div class="mb-3">
-    <a href="{{ route('admin.crear.usuario') }}" class="btn btn-primary">Crear Usuario</a>
-    <a href="{{ route('admin.lista.usuarios') }}" class="btn btn-info">📋 Ver Lista de Usuarios</a>
+    
+    <a href="{{ route('admin.lista.usuarios') }}" class="btn btn-info">Ver Lista de Usuarios</a>
 </div>
     </form>
 </div>

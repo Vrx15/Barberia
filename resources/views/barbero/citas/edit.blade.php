@@ -18,31 +18,39 @@
         @csrf
         @method('PUT')
 
+        <!-- Selección de servicio -->
         <div class="mb-3">
             <label for="servicio" class="form-label">Servicio</label>
-            <input type="text" name="servicio" id="servicio" class="form-control" value="{{ old('servicio', $cita->servicio) }}" required>
+            <select name="servicio" id="servicio" class="form-select" required>
+                <option value="">Selecciona un servicio</option>
+                <option value="Corte de cabello" {{ (isset($cita) && $cita->servicio == 'Corte de cabello') || old('servicio') == 'Corte de cabello' ? 'selected' : '' }}>Corte de cabello</option>
+                <option value="Afeitado" {{ (isset($cita) && $cita->servicio == 'Afeitado') || old('servicio') == 'Afeitado' ? 'selected' : '' }}>Afeitado</option>
+                <option value="Arreglo de barba" {{ (isset($cita) && $cita->servicio == 'Arreglo de barba') || old('servicio') == 'Arreglo de barba' ? 'selected' : '' }}>Arreglo de barba</option>
+                <option value="Combo (corte + barba)" {{ (isset($cita) && $cita->servicio == 'Combo (corte + barba)') || old('servicio') == 'Combo (corte + barba)' ? 'selected' : '' }}>Combo (corte + barba)</option>
+            </select>
         </div>
 
+        <!-- Fecha y hora -->
         <div class="mb-3">
             <label for="fecha_hora" class="form-label">Fecha y Hora</label>
             <input type="datetime-local" name="fecha_hora" id="fecha_hora" class="form-control"
-       value="{{ old('fecha_hora', $cita->fecha_hora ? $cita->fecha_hora->format('Y-m-d\TH:i') : '') }}" required>
-
+                   value="{{ old('fecha_hora', $cita->fecha_hora ? \Carbon\Carbon::parse($cita->fecha_hora)->format('Y-m-d\TH:i') : '') }}" required>
         </div>
 
+        <!-- Barbero -->
         <div class="mb-3">
             <label for="barbero_id" class="form-label">Barbero</label>
             <select name="barbero_id" id="barbero_id" class="form-select">
                 <option value="">-- No asignado --</option>
                 @foreach($barberos as $barbero)
-                    <option value="{{ $barbero->id }}"
-                        {{ old('barbero_id', $cita->barbero_id) == $barbero->id ? 'selected' : '' }}>
-                        {{ $barbero->name }}
+                    <option value="{{ $barbero->id }}" {{ old('barbero_id', $cita->barbero_id) == $barbero->id ? 'selected' : '' }}>
+                        {{ $barbero->username }}
                     </option>
                 @endforeach
             </select>
         </div>
 
+        <!-- Estado -->
         <div class="mb-3">
             <label for="estado" class="form-label">Estado</label>
             <select name="estado" id="estado" class="form-select" required>

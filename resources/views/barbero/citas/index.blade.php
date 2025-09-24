@@ -27,7 +27,7 @@
                     <tr>
                         <td>{{ $cita->cliente->name ?? 'Sin cliente' }}</td>
                         <td>{{ $cita->servicio }}</td>
-                        <td>{{ $cita->fecha_hora ? $cita->fecha_hora->format('d/m/Y H:i') : 'Sin fecha' }}</td>
+                       <td>{{ $cita->fechaHoraCompleta }}</td>
 
                         <td>{{ ucfirst($cita->estado) }}</td>
                         <td>{{ $cita->barbero->name ?? 'No asignado' }}</td>

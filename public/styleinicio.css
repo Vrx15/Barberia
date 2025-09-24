@@ -327,6 +327,19 @@ background-color: rgba(26, 26, 26, 0.9);
     color: #e6b800; /* Un dorado más oscuro al pasar el mouse */
 }
 
+.alert-login {
+    background: #ffcc00;
+    color: black;
+    padding: 3px;
+    text-align: center;
+    font-size: 0.8 rem;
+    font-weight: 500;
+    margin: 0; 
+    width: 100%;
+    position: relative;
+    left: 0;
+}
+
 
 
 

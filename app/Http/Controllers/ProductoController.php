@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
+    // Listar productos para clientes
+public function indexCliente()
+{
+    $productos = Producto::all(); // O filtra si quieres solo productos disponibles
+    return view('productos.listado', compact('productos'));
+}
     // Listar productos para barbero
     public function index()
     {

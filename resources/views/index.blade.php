@@ -21,6 +21,14 @@
   <link rel="stylesheet" href="styleinicio.css">
 </head>
 <body>
+    @guest
+        <!-- Si NO está logueado -->
+        <div class="alert alert-login">
+            <strong>Crea una cuenta o accede para disfrutar de la experiencia completa.</strong><br>
+  
+        </div>
+    @endguest
+</div>
 
 
 <div id="bienvenida">
@@ -33,6 +41,7 @@
 
 
     </div>
+    
 </div>
 <div class="beneficios-sala">
   <h2>Beneficios</h2>

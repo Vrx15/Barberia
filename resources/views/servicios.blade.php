@@ -35,11 +35,11 @@
     </div>
     <div class="servicio">
       <p>Skincare = $20.000</p>
-      <img src="skincare.webp" alt="Tintura">
+      <img src="skincare.jpg" alt="Tintura">
     </div>
     <div class="servicio">
       <p>Asesoria = $20.000</p>
-      <img src="asesoria.png" alt="Tintura">
+      <img src="asesoria.jpg" alt="Tintura">
     </div>
   </div>
 

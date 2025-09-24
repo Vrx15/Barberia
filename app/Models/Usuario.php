@@ -23,6 +23,22 @@ class Usuario extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    // Relación con las citas del usuario (como cliente)
+    public function citas()
+    {
+        return $this->hasMany(Cita::class, 'usuario_id');
+    }
+
+    // Relación con las citas donde es el barbero
+    public function citasComoBarbero()
+    {
+        return $this->hasMany(Cita::class, 'barbero_id');
+    }
+
+    // Accesor para el nombre (usando username)
+    public function getNameAttribute()
+    {
+        return $this->username;
+    }
 }
-
-

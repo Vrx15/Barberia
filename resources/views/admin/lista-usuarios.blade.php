@@ -11,8 +11,8 @@
     @endif
 
     <div class="mb-3">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">← Volver al Dashboard</a>
-        <a href="{{ route('admin.crear.usuario') }}" class="btn btn-primary">➕ Crear Nuevo Usuario</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">← Crear nuevo usuario</a>
+        
     </div>
 
     <div class="table-responsive">
@@ -45,8 +45,9 @@
                     </td>
                     <td>{{ $usuario->created_at->format('d/m/Y H:i') }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-info">Ver</a>
-                        <a href="#" class="btn btn-sm btn-warning">Editar</a>
+                        
+                        <a href="{{ route('admin.usuario.edit', $usuario->id) }}" class="btn btn-sm btn-warning">Editar</a>
+
                     </td>
                 </tr>
                 @endforeach

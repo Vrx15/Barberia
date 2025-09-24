@@ -13,13 +13,18 @@ public function up()
 {
     Schema::create('sugerencias', function (Blueprint $table) {
         $table->id();
-        $table->string('nombre', 50);
-        $table->string('email', 100);
+
+        // 🔑 Relación con usuarios
+        $table->unsignedBigInteger('usuario_id'); 
+        $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
+
+        // Solo el mensaje
         $table->text('mensaje');
+
         $table->timestamps();
     });
-}
 
+}
     /**
      * Reverse the migrations.
      */

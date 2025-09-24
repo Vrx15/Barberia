@@ -12,7 +12,7 @@
         <div class="bg-blue-100 p-5 rounded shadow">
             <h2 class="text-xl font-semibold mb-2">Tus Citas</h2>
             <p>Revisa todas tus citas programadas.</p>
-            <a href="{{ route('citas.index') }}" class="text-blue-600 hover:underline">Ver citas</a>
+            <a href="{{ route('barbero.citas.index') }}" class="text-blue-600 hover:underline">Ver citas</a>
         </div>
 
         <div class="bg-green-100 p-5 rounded shadow">

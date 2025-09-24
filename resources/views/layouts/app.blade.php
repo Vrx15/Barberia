@@ -9,36 +9,34 @@
     <link rel="stylesheet" href="{{ asset('styleregistrarse.css') }}">
     <link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}">
     <link rel="stylesheet" href="{{ asset('stylefooter.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/botones.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stylebotonhistorial.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stylehistorial.css') }}">
     
-    <!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- Font Awesome CDN -->
-
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body style="display: flex; flex-direction: column; min-height: 100vh;">
 
-    <!-- Header -->
-<header>
-    <div class="encabezado">
-        <a href="/">
-            <img src="LOGO.png" alt="Inicio" style="height:60px;">
-        </a>
-        <a href="{{ route('formulario') }}">Agenda Ahora</a>
-        <a href="{{ url('/servicios') }}">Servicios</a>
-        <a href="{{ url('/sugerencias') }}">Sugerencias</a>
-        <a href="{{ url('/productos') }}">Productos</a>
-    </div>
+    <header>
+        <div class="encabezado">
+            <a href="/">
+                <img src="LOGO.png" alt="Inicio" style="height:60px;">
+            </a>
+            <a href="{{ route('formulario') }}">Agenda Ahora</a>
+            <a href="{{ url('/servicios') }}">Servicios</a>
+            <a href="{{ url('/sugerencias') }}">Sugerencias</a>
+            <a href="{{ url('/productos') }}">Productos</a>
+            <!-- 👇 Ya NO hay botón de historial aquí -->
+        </div>
 
-    <nav>
-        @guest
-        <a href="{{ route('login') }}" class="btn-custom">Iniciar sesión</a>
-        <a href="{{ route('registrarse') }}" class="btn-custom">Registrarse</a>
-        @endguest
+        <nav>
+            @guest
+                <a href="{{ route('login') }}" class="btn-custom">Iniciar sesión</a>
+                <a href="{{ route('registrarse') }}" class="btn-custom">Registrarse</a>
+            @endguest
 
-        @auth
+            @auth
             <div class="dropdown">
                 <img
                     src="{{ Auth::user()->foto ?? asset('avatar.png') }}"
@@ -46,31 +44,33 @@
                     class="avatar"
                 >
                 <div class="dropdown-content">
-                    <span class="user-name"> {{ ucfirst(Auth::user()->username) }}</span>
-                    <form action="{{ route('logout') }}" method="POST">
+                    <span class="user-name">{{ ucfirst(Auth::user()->username) }}</span>
+                    
+                    <!-- ✅ Botón historial solo dentro del menú del usuario -->
+                    <button class="dropdown-btn historial-btn" onclick="window.location.href='{{ route('historial') }}'">
+                        <i class="fas fa-history"></i> Mi Historial
+                    </button>
+                    
+                    <form action="{{ route('logout') }}" method="POST" class="logout-form">
                         @csrf
-                        <button type="submit" class="logout-btn">Cerrar sesión</button>
+                        <button type="submit" class="dropdown-btn logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                        </button>
                     </form>
                 </div>
             </div>
-        @endauth
-    </nav>
-</header>
+            @endauth
+        </nav>
+    </header>
 
-
-
-
-    <!-- Contenido principal -->
     <main style="flex: 1;">
         @yield('content')
     </main>
 
     <a href="https://www.whatsapp.com/" class="whatsapp-button" target="_blank">
-    <img src="https://thumbs.dreamstime.com/b/icono-del-logotipo-de-whatsapp-blanco-y-negro-simple-archivo-ai-ilustraci%C3%B3n-vectorial-199912365.jpg" alt="WhatsApp">
-</a>
-
-
-    <!-- Footer -->
+        <img src="https://thumbs.dreamstime.com/b/icono-del-logotipo-de-whatsapp-blanco-y-negro-simple-archivo-ai-ilustraci%C3%B3n-vectorial-199912365.jpg" alt="WhatsApp">
+    </a>
+        <!-- Footer -->
 <footer>
   <div class="footer-container">
     <div class="footer-about">
@@ -90,8 +90,7 @@
       <ul>
 
         <li><a href="https://www.google.com/maps/place/SENA+-+Centro+De+Servicios+Financieros/@4.651881,-74.067833,17z/data=!3m1!4b1!4m6!3m5!1s0x8e3f9a45d9f1654b:0x3d69138572d157f2!8m2!3d4.6518757!4d-74.0629621!16s%2Fg%2F1tg51gp_?entry=ttu&g_ep=EgoyMDI1MDkwOC4wIKXMDSoASAFQAw%3D%3D">Kr 13 #65-10, Bogotá</a></li>
-        <li><a href="https://www.google.com/maps/place/Sena+Complejo+de+Paloquemao/@4.65625,-74.081989,14.25z/data=!4m10!1m2!2m1!1ssena!3m6!1s0x8e3f996f759820ad:0x8064dc77d651db18!8m2!3d4.6166055!4d-74.0915012!15sCgRzZW5hkgEKdW5pdmVyc2l0eaoBOQoKL20vMGI3NzkwaxABMh8QASIbLGKNx5kGIGYtiUxCtfbJE2oEdhouQETY_OgzMggQAiIEc2VuYeABAA!16s%2Fg%2F11b7hcbqkm?entry=ttu&g_ep=EgoyMDI1MDkwOC4wIKXMDSoASAFQAw%3D%3D">Cl. 15 #42, Bogotá</a></li>
-        <li><a href="https://www.google.com/maps/place/SENA+SALITRE/@4.6548112,-74.0837934,14.25z/data=!4m10!1m2!2m1!1ssena!3m6!1s0x8e3f9b070b5f0ff7:0xd2af7f8cc2875af0!8m2!3d4.6654889!4d-74.0837482!15sCgRzZW5hWgYiBHNlbmGSARBlZHVjYXRpb25fY2VudGVyqgE5CgovbS8wYjc3OTBrEAEyHxABIhssYo3HmQYgZi2JTEK19skTagR2Gi5ARNj86DMyCBACIgRzZW5h4AEA!16s%2Fg%2F11s9dll71c?entry=ttu&g_ep=EgoyMDI1MDkwOC4wIKXMDSoASAFQAw%3D%3D">Cra. 57c #64-29, Bogotá</a></li>
+
 
       </ul>
     </div>
@@ -118,4 +117,5 @@
   </div>
 </footer>
 
-
+</body>
+</html>

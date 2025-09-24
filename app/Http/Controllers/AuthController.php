@@ -40,7 +40,7 @@ public function login(Request $request)
         } elseif ($user->rol === 'barbero') {
             return redirect()->route('barbero.dashboard');
         } else {
-            return redirect()->route('index');
+            return redirect()->route('home');
         }
     }
 

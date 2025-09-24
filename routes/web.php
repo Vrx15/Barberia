@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\BarberoController;
+use App\Http\Controllers\BarberoCitaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SugerenciaController;
 use App\Http\Controllers\AuthController;
@@ -21,7 +22,7 @@ Route::view('/servicios', 'servicios')->name('servicios');
 Route::view('/registrarse', 'registrarse')->name('registrarse');
 
 // -------------------------
-// Login / Logout
+// Login / Logout / Registro
 // -------------------------
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
@@ -41,95 +42,101 @@ Route::resource('citas', CitaController::class)->middleware('auth');
 // -------------------------
 // Sugerencias
 // -------------------------
-Route::get('/sugerencias', [SugerenciaController::class, 'create'])->name('sugerencias.create');
-Route::post('/sugerencias', [SugerenciaController::class, 'store'])->name('sugerencias.store');
-
-Route::middleware('auth')->group(function () {
-Route::get('/formulario', [CitaController::class, 'create'])->name('formulario');
-Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sugerencias', [SugerenciaController::class, 'create'])->name('sugerencias.create');
+    Route::post('/sugerencias', [SugerenciaController::class, 'store'])->name('sugerencias.store');
 });
 
-Route::post('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-    return redirect('/');
-})->name('logout');
+// -------------------------
+// Rutas de citas para usuarios autenticados
+// -------------------------
+Route::middleware('auth')->group(function () {
+    Route::get('/formulario', [CitaController::class, 'create'])->name('formulario');
+    Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
 
-// admin_page//
-// Agrega esta ruta dentro del grupo de admin
-// QUITA 'role:admin' temporalmente:
-// Vuelve a tu código original pero SIN el middleware 'role'
+    Route::get('/historial', [CitaController::class, 'historial'])->name('historial');
+
+    Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
+    Route::get('/citas/{id}/edit', [CitaController::class, 'edit'])->name('citas.edit');
+    Route::put('/citas/{id}', [CitaController::class, 'update'])->name('citas.update');
+    Route::get('/citas/{id}', [CitaController::class, 'show'])->name('citas.show');
+    Route::delete('/citas/{id}', [CitaController::class, 'destroy'])->name('citas.destroy');
+    Route::post('/citas/{id}/cancelar', [CitaController::class, 'cancelar'])->name('citas.cancelar');
+    
+});
+Route::post('/citas/{id}/eliminar', [CitaController::class, 'eliminar'])->name('citas.eliminar');
+Route::get('/formulario/{id?}', [CitaController::class, 'create'])->name('formulario');
+
+// -------------------------
+// Admin routes
+// -------------------------
 Route::middleware(['auth'])->group(function () {
-    // Ruta para crear usuario
     Route::get('/admin/crear-usuario', [UsuarioController::class, 'create'])->name('admin.crear.usuario');
     Route::post('/admin/crear-usuario', [UsuarioController::class, 'store'])->name('admin.usuario.store');
-    
-    // 🔥 NUEVA RUTA para listar usuarios
     Route::get('/admin/lista-usuarios', [UsuarioController::class, 'index'])->name('admin.lista.usuarios');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/usuarios/{usuario}/editar', [UsuarioController::class, 'edit'])->name('admin.usuario.edit');
+Route::put('/admin/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('admin.usuario.update');
+
 });
 
-// Y agrega esta verificación DIRECTAMENTE en el controlador
-//Route::middleware(['auth', 'role:admin'])->group(function () {
-//    Route::get('/admin/dashboard', function () {
-//        return view('admin.dashboard');
-//    })->name('admin.dashboard');
-//});
+// -------------------------
+// Barbero routes
+// -------------------------
+// Grupo de rutas para barbero
+Route::prefix('barbero')->name('barbero.')->middleware('auth')->group(function () {
 
+    // Dashboard del barbero
+    Route::get('/dashboard', [DashboardController::class, 'barberoDashboard'])->name('dashboard');
 
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    // Citas del barbero
+    Route::get('/citas', [BarberoCitaController::class, 'index'])->name('citas.index');
+    Route::get('/citas/{cita}', [BarberoCitaController::class, 'show'])->name('citas.show');
+    Route::get('/citas/{cita}/editar', [BarberoCitaController::class, 'edit'])->name('citas.edit');
+    Route::put('/citas/{cita}', [BarberoCitaController::class, 'update'])->name('citas.update');
+    Route::delete('/citas/{cita}', [BarberoCitaController::class, 'destroy'])->name('citas.destroy');
 
-Route::middleware('auth')->group(function () {
-    Route::get('index', function () {
-       return view('index');
-    })->name('index');
+    // Aquí irían otras rutas de productos del barbero, etc.
 });
 
-// Registro
-Route::get('/registrarse', [AuthController::class, 'showRegisterForm'])->name('registrarse');
-Route::post('/registrarse', [AuthController::class, 'register'])->name('registrarse.post');
-//barbero
-
-
-
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/barbero/dashboard', function () {
-        if (auth()->user()->rol !== 'barbero') {
-            abort(403, 'No autorizado');
-        }
-        return view('barbero.dashboard');
-    })->name('barbero.dashboard');
-});
-
-//Productos
-
+// -------------------------
+// Productos
+// -------------------------
 Route::resource('productos', ProductoController::class);
-// Productos para usuarios clientes
+
+// Productos para clientes
 Route::middleware('auth')->group(function () {
     Route::get('/productos', [ProductoController::class, 'indexCliente'])->name('productos.cliente');
 });
 
-
+// Productos para barbero
 Route::prefix('barbero')->name('barbero.')->group(function () {
-    // Listar productos
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
-
-    // Formulario para crear producto
     Route::get('/productos/crear', [ProductoController::class, 'create'])->name('productos.create');
     Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
-
-    // Formulario para editar producto
     Route::get('/productos/{producto}/editar', [ProductoController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('productos.update');
-
-    // Eliminar producto
-    Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])
-    ->name('productos.destroy');
-
+    Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 });
 
-
-
-
-
+// Rutas de citas
+Route::middleware('auth')->group(function () {
+    // Historial del usuario
+    Route::get('/historial', [CitaController::class, 'historial'])->name('historial');
+    
+    // Citas normales
+    Route::get('/formulario', [CitaController::class, 'create'])->name('formulario');
+    Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
+    
+    // Rutas para administración (si necesitas)
+    Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
+    
+    // Rutas para editar, ver y cancelar
+    Route::get('/citas/{id}/edit', [CitaController::class, 'edit'])->name('citas.edit');
+    Route::put('/citas/{id}', [CitaController::class, 'update'])->name('citas.update');
+    Route::get('/citas/{id}', [CitaController::class, 'show'])->name('citas.show');
+    Route::delete('/citas/{id}', [CitaController::class, 'destroy'])->name('citas.destroy');
+    Route::post('/citas/{id}/cancelar', [CitaController::class, 'cancelar'])->name('citas.cancelar');
+});
+Route::post('/citas/{id}/eliminar', [CitaController::class, 'eliminar'])->name('citas.eliminar');
+Route::get('/formulario/{id?}', [CitaController::class, 'create'])->name('formulario');

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
+<section class="fade-section">
     <h1 class="mb-4">Productos Disponibles</h1>
 
     @if(session('success'))

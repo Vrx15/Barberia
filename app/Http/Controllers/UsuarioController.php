@@ -60,7 +60,7 @@ class UsuarioController extends Controller
 
     public function edit(Usuario $usuario)
     {
-        return view('usuarios.edit', compact('usuario'));
+        return view('admin.edit', compact('usuario'));
     }
 
     public function update(Request $request, Usuario $usuario)
@@ -70,7 +70,7 @@ class UsuarioController extends Controller
             'username' => 'required|string|max:20',
             'telefono' => 'required|string|max:10',
             'email'    => 'required|string|email|max:50|unique:usuarios,email,' . $usuario->id,
-            'password' => 'required|string|max:20',
+            'password' => 'nullable|string|min:6|confirmed', // opcional
         ]);
 
         // 🔹 Actualizar usuario
@@ -82,7 +82,7 @@ class UsuarioController extends Controller
             'rol'      => $usuario->rol,
         ]);
 
-        return redirect()->route('login')->with('success', 'Usuario actualizado correctamente.');
+        return redirect()->route('admin.lista.usuarios')->with('success', 'Usuario actualizado correctamente.');
     }
 
     public function destroy(Usuario $usuario)

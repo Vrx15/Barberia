@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sugerencia;
+use Illuminate\Support\Facades\Auth;
 
 class SugerenciaController extends Controller
 {
@@ -12,17 +13,19 @@ class SugerenciaController extends Controller
         return view('sugerencias.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'email' => 'nullable|email',
-            'mensaje' => 'required|string',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'mensaje' => 'required|string',
+    ]);
 
-        Sugerencia::create($request->only(['nombre', 'email', 'mensaje']));
+    Sugerencia::create([
+        'usuario_id' => Auth::id(), // 👈 Se guarda el usuario logueado
+        'mensaje' => $request->mensaje,
+    ]);
 
-
-        return redirect()->back()->with('success', 'Gracias por tu sugerencia!');
-    }
+    return redirect()->back()->with('success', '¡Gracias por tu sugerencia!');
 }
+}
+
+
