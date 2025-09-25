@@ -105,9 +105,9 @@ Route::prefix('barbero')->name('barbero.')->middleware('auth')->group(function (
 Route::resource('productos', ProductoController::class);
 
 // Productos para clientes
-Route::middleware('auth')->group(function () {
+
     Route::get('/productos', [ProductoController::class, 'indexCliente'])->name('productos.cliente');
-});
+
 
 // Productos para barbero
 Route::prefix('barbero')->name('barbero.')->group(function () {

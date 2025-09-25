@@ -1,7 +1,7 @@
 @extends('layouts.barbero')
 
 @section('content')
-<div class="container">
+<section class="fade-section">
     <h1>Lista de Citas</h1>
 
     @if(session('success'))

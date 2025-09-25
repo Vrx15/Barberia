@@ -1,7 +1,7 @@
 @extends('layouts.barbero')
 
 @section('content')
-<div class="container">
+<section class="fade-section">
     <h1>Detalles de la Cita</h1>
 
     <ul>

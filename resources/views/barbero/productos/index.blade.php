@@ -1,10 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.barbero')
 
 @section('content')
-<div class="container">
+<section class="fade-section">
     <h1 class="mb-4">Productos</h1>
 
-    <a href="{{ route('barbero.productos.create') }}" class="btn btn-primary mb-3">Agregar Producto</a>
+    <button class="mb-3" onclick="window.location='{{ route('barbero.productos.create') }}'">Agregar Producto</button>
+
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

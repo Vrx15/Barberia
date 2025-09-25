@@ -17,6 +17,7 @@ class Producto extends Model
         'cantidad',
         'categoria',
         'nombre',
+        'imagen',
     ];
     public function getRouteKeyName()
 {

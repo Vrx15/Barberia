@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<section class="fade-section">
     <h1>Editar Cita</h1>
 
     @if ($errors->any())

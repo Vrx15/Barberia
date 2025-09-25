@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="lista-usuarios-container"> 
     <h1>Lista de Usuarios Registrados</h1>
 
     @if (session('success'))
@@ -12,7 +12,6 @@
 
     <div class="mb-3">
         <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">← Crear nuevo usuario</a>
-        
     </div>
 
     <div class="table-responsive">
@@ -45,9 +44,17 @@
                     </td>
                     <td>{{ $usuario->created_at->format('d/m/Y H:i') }}</td>
                     <td>
-                        
                         <a href="{{ route('admin.usuario.edit', $usuario->id) }}" class="btn btn-sm btn-warning">Editar</a>
-
+                        
+                        <!-- Botón de eliminar con confirmación -->
+                        <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" 
+                                onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
+                                Eliminar
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

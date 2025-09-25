@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.barbero')
 
 @section('content')
+<section class="fade-section">
 <h1>Editar Producto</h1>
 
 @if ($errors->any())
@@ -40,5 +41,5 @@
     <button type="submit">Actualizar Producto</button>
 </form>
 
-<a href="{{ route('barbero.productos.index') }}">Volver a la lista de productos</a>
+<button class="mb-3" onclick="window.location='{{ route('barbero.productos.index') }}'">Volver a la lista de productos</button>
 @endsection

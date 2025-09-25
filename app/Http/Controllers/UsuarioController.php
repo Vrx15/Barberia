@@ -85,9 +85,15 @@ class UsuarioController extends Controller
         return redirect()->route('admin.lista.usuarios')->with('success', 'Usuario actualizado correctamente.');
     }
 
-    public function destroy(Usuario $usuario)
-    {
-        $usuario->delete();
-        return redirect()->route('login')->with('success', 'Usuario eliminado correctamente.');
+       public function destroy($id)
+{
+    if (auth()->check() && auth()->user()->rol !== 'admin') {
+        abort(403, 'No tienes permisos de administrador');
     }
+
+    $usuario = Usuario::findOrFail($id);
+    $usuario->delete();
+
+    return redirect()->route('admin.lista.usuarios')->with('success', 'Usuario eliminado correctamente');
+}
 }

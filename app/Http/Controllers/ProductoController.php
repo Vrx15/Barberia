@@ -27,20 +27,30 @@ public function indexCliente()
     }
 
     // Guardar producto
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'precio' => 'required|numeric',
-            'cantidad' => 'required|integer',
-            'categoria' => 'required|string|max:100',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'precio' => 'required|numeric',
+        'cantidad' => 'required|integer',
+        'categoria' => 'required|string|max:100',
+        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validación de imagen
+    ]);
 
-        Producto::create($request->all());
+    // Preparar datos
+    $data = $request->all();
 
-        return redirect()->route('barbero.productos.index')
-                         ->with('success', 'Producto creado correctamente');
+    // Subida de imagen
+    if ($request->hasFile('imagen')) {
+        $path = $request->file('imagen')->store('productos', 'public'); 
+        $data['imagen'] = $path; // guardamos la ruta en el array de datos
     }
+
+    Producto::create($data);
+
+    return redirect()->route('barbero.productos.index')
+                     ->with('success', 'Producto creado correctamente');
+}
 
     // Formulario de edición
     public function edit(Producto $producto)
@@ -57,6 +67,13 @@ public function indexCliente()
             'cantidad' => 'required|integer',
             'categoria' => 'required|string|max:100',
         ]);
+        if ($request->hasFile('imagen')) {
+    if ($producto->imagen && file_exists(storage_path('app/public/' . $producto->imagen))) {
+        unlink(storage_path('app/public/' . $producto->imagen));
+    }
+    $path = $request->file('imagen')->store('productos', 'public');
+    $data['imagen'] = $path;
+}
 
         $producto->update($request->all());
 

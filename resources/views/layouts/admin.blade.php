@@ -25,17 +25,12 @@
     <!-- Header -->
 <header>
     <div class="encabezado">
-        <a href="/">
-            <img src="LOGO.png" alt="Inicio" style="height:60px;">
-        </a>
+     
 
     </div>
 
     <nav>
-        @guest
-        <a href="{{ route('login') }}" class="btn-custom">Iniciar sesión</a>
-        <a href="{{ route('registrarse') }}" class="btn-custom">Registrarse</a>
-        @endguest
+        
 
         @auth
             <div class="dropdown">
