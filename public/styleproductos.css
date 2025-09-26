@@ -101,4 +101,47 @@ body::before {
     background-color: #e6b800;
     transform: scale(1.05);
 }
+/* Contenedor para alinear botones */
+.acciones {
+    display: flex;
+    gap: 10px;          /* espacio entre los botones */
+    justify-content: flex-start; /* o center según prefieras */
+    align-items: center;
+}
+
+/* Botones iguales */
+.btn-editar,
+.btn-eliminar {
+    width: 120px;             /* mismo ancho */
+    padding: 8px 0;           /* igual alto */
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* Botón Editar */
+.btn-editar {
+    background: #ffcc00;
+    color: #1a1a1a;
+    text-transform: none;  /* que no esté en mayúscula */
+}
+.btn-editar:hover {
+    background: #e6b800;
+}
+
+/* Botón Eliminar */
+.btn-eliminar {
+    background: #dc3545;
+    color: white;
+    text-transform: none;  /* evitar mayúscula */
+}
+.btn-eliminar:hover {
+    background: #c82333;
+}
+
 

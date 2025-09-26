@@ -79,7 +79,7 @@ class UsuarioController extends Controller
             'telefono' => $request->telefono,
             'email'    => $request->email,
             'password' => bcrypt($request->password), // 🔹 FALTAVA bcrypt AQUÍ
-            'rol'      => $usuario->rol,
+            'rol'      => $request->rol,
         ]);
 
         return redirect()->route('admin.lista.usuarios')->with('success', 'Usuario actualizado correctamente.');
@@ -95,5 +95,33 @@ class UsuarioController extends Controller
     $usuario->delete();
 
     return redirect()->route('admin.lista.usuarios')->with('success', 'Usuario eliminado correctamente');
+}
+public function desactivar($id)
+{
+    $usuario = Usuario::findOrFail($id);
+    $usuario->activo = false;
+    $usuario->save();
+
+    return redirect()->back()->with('success', 'Usuario desactivado correctamente.');
+}
+
+public function activar($id)
+{
+    $usuario = Usuario::findOrFail($id);
+    $usuario->activo = true;
+    $usuario->save();
+
+    return redirect()->back()->with('success', 'Usuario activado correctamente.');
+}
+public function toggleActivo($id)
+{
+    $usuario = Usuario::findOrFail($id);
+
+    // Cambia el estado
+    $usuario->activo = !$usuario->activo;
+    $usuario->save();
+
+    $estado = $usuario->activo ? 'activado' : 'desactivado';
+    return redirect()->back()->with('success', "Usuario {$estado} correctamente.");
 }
 }

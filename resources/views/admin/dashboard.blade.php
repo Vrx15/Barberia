@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<section class="fade-section">
     <h1>Crear Usuario</h1>
 
     @if (session('success'))
@@ -20,7 +20,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.usuario.store') }}" method="POST">
+    <form action="{{ route('admin.usuario.store') }}" method="POST" class="form-crear-usuario">
         @csrf
         <div class="form-group">
             <label for="username">Nombre de usuario</label>
@@ -59,7 +59,7 @@
         <button type="submit" class="btn btn-primary mt-3">Registrar</button>
         <div class="mb-3">
     
-    <a href="{{ route('admin.lista.usuarios') }}" class="btn btn-info">Ver Lista de Usuarios</a>
+    
 </div>
     </form>
 </div>

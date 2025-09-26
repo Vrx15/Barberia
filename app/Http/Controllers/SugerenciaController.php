@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class SugerenciaController extends Controller
 {
+    public function index()
+    {
+        $sugerencias = Sugerencia::latest()->paginate(10); 
+        return view('admin.sugerencias', compact('sugerencias'));
+    }
     public function create()
     {
         return view('sugerencias.create');
@@ -19,13 +24,13 @@ public function store(Request $request)
         'mensaje' => 'required|string',
     ]);
 
-    Sugerencia::create([
-        'usuario_id' => Auth::id(), // 👈 Se guarda el usuario logueado
+        Sugerencia::create([
+        'nombre'  => Auth::user()->name,
+        'email'   => Auth::user()->email,
         'mensaje' => $request->mensaje,
     ]);
 
-    return redirect()->back()->with('success', '¡Gracias por tu sugerencia!');
-}
+    return redirect()->back()->with('success', 'Sugerencia enviada correctamente');
 }
 
-
+}

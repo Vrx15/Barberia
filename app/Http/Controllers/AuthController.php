@@ -22,7 +22,7 @@ class AuthController extends Controller
     }
     public function showRegisterFormAdmin()
 {
-    return view('admin.dashboard'); // Vista específica para admin
+    return view('admin.index'); // Vista específica para admin
 }
 
     // Procesar login
@@ -33,10 +33,17 @@ public function login(Request $request)
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
         $user = Auth::user();
-        
+
+        // Validar si el usuario está activo
+        if (!$user->activo) {
+            Auth::logout(); // cerrar sesión por seguridad
+            return back()->withErrors([
+                'email' => 'Tu cuenta está desactivada.',
+            ]);
+        }
 
         if ($user->rol === 'admin') {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.index');
         } elseif ($user->rol === 'barbero') {
             return redirect()->route('barbero.dashboard');
         } else {

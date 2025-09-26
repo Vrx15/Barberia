@@ -16,7 +16,7 @@ public function indexCliente()
     // Listar productos para barbero
     public function index()
     {
-        $productos = Producto::all();
+        $productos = Producto::paginate(10);
         return view('barbero.productos.index', compact('productos'));
     }
 

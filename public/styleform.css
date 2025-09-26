@@ -1,48 +1,126 @@
-/* Estilos específicos para la tabla de usuarios */
+/* ====== Contenedor principal ====== */
 .lista-usuarios-container {
+    background-color: rgba(26, 26, 26, 0.9);
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+.lista-usuarios-container .btn {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    margin: 2px;
+    transition: all 0.3s ease;
+    text-align: center; 
 }
 
+/* Botón especial para crear */
+.btn-crear {
+    display: block !important;
+    width: 300px !important;         /* ancho fijo */
+    margin: 0 auto 20px !important;  /* centrado y separado abajo */
+    text-align: center;
+    white-space: nowrap;
+    background: #ffcc00;  /* dorado */
+    color: #1a1a1a;       /* texto oscuro */
+    font-size: 16px;      /* un poco más grande */
+    font-weight: 600;
+    padding: 12px 25px;   /* más alto que los demás */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: none;
+}
+
+.btn-crear:hover {
+    background: #e6b800;  /* dorado más oscuro */
+    transform: translateY(-2px);
+}
+
+
+/* ====== Título ====== */
 .lista-usuarios-container h1 {
     color: white;
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 24px;
-    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 2em;
+    font-weight: 700;
+    position: relative;
 }
 
-.lista-usuarios-container .mb-3 {
-    margin-bottom: 15px !important;
-    text-align: center;
+.lista-usuarios-container h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #ffcc00;
+    margin: 10px auto;
+    border-radius: 2px;
 }
 
+/* ====== Botón superior ====== */
+.lista-usuarios-container .acciones .accion-btn {
+    height: 32px;          /* misma altura para todos */
+    min-width: 100px;      /* ancho mínimo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .lista-usuarios-container .btn-secondary {
-    background: #6c757d;
-    color: white;
+    background: #ffcc00;
+    color: black;
     padding: 12px 25px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 8px;
     display: inline-block;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 14px;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .lista-usuarios-container .btn-secondary:hover {
-    background: #545b62;
+    background: #e6b800;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+}
+.lista-usuarios-container .mb-3 {
+    text-align: center; 
+}
+.lista-usuarios-container .btn-info {
+    background: #007bff; /* azul */
     color: white;
+    text-transform: none; /* para que no esté en mayúsculas */
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 2px;
+    transition: all 0.3s ease;
 }
 
+.lista-usuarios-container .btn-info:hover {
+    background: #0069d9; /* azul más oscuro al pasar el mouse */
+}
+
+/* ====== Tabla ====== */
 .lista-usuarios-container .table-responsive {
-    background: white;
-    border-radius: 8px;
+    background: rgba(26, 26, 26, 0.95);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-top: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    margin-top: 20px;
 }
 
 .lista-usuarios-container .table {
@@ -51,116 +129,119 @@
 }
 
 .lista-usuarios-container .table thead {
-    background: #343a40;
+    background: #1a1a1a;
 }
 
 .lista-usuarios-container .table thead th {
-    color: white;
+    color: #ffcc00;
     padding: 15px 12px;
     text-align: left;
     font-weight: bold;
     font-size: 14px;
-    border-right: 1px solid #495057;
-}
-
-.lista-usuarios-container .table thead th:last-child {
-    border-right: none;
+    border-bottom: 2px solid #333;
 }
 
 .lista-usuarios-container .table tbody tr {
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid #333;
 }
 
 .lista-usuarios-container .table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .lista-usuarios-container .table tbody tr:hover {
-    background-color: #e9ecef;
+    background-color: rgba(255, 204, 0, 0.1);
 }
 
 .lista-usuarios-container .table tbody td {
     padding: 12px;
-    border-right: 1px solid #dee2e6;
     vertical-align: middle;
     font-weight: normal;
-    color: #2c3e50;
+    color: white;
 }
 
-.lista-usuarios-container .table tbody td:last-child {
-    border-right: none;
-}
-
+/* ====== Badges ====== */
 .lista-usuarios-container .badge {
-    padding: 6px 12px;
-    border-radius: 4px;
+    display: inline-block;
+    min-width: 100px; 
+    text-align: center; 
+    padding: 3px 0; 
+    border-radius: 6px;
     font-size: 12px;
     font-weight: bold;
 }
 
 .lista-usuarios-container .bg-danger {
-    background: #dc3545 !important;
+    background: #792d35 !important;
     color: white !important;
 }
 
 .lista-usuarios-container .bg-warning {
-    background: #ffc107 !important;
-    color: #212529 !important;
-}
-
-.lista-usuarios-container .bg-primary {
-    background: #007bff !important;
+    background: #9b8427 !important;
     color: white !important;
 }
 
+.lista-usuarios-container .bg-primary {
+    background: #263f58 !important;
+    color: white !important;
+}
+
+/* ====== Botones de acciones ====== */
 .lista-usuarios-container .btn {
-    padding: 8px 15px;
+    padding: 5px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     text-decoration: none;
     font-size: 12px;
     font-weight: bold;
     cursor: pointer;
     display: inline-block;
     margin: 2px;
+    transition: all 0.3s ease;
+    width: 100px;       
+    text-align: center; 
 }
 
 .lista-usuarios-container .btn-warning {
-    background: #ffc107;
-    color: #212529;
+    background: #ffcc00;
+    color: black;
 }
 
 .lista-usuarios-container .btn-warning:hover {
-    background: #e0a800;
+    background: #e6b800;
 }
 
 .lista-usuarios-container .btn-danger {
     background: #dc3545;
     color: white;
+    text-transform: none;
 }
 
 .lista-usuarios-container .btn-danger:hover {
     background: #c82333;
 }
 
-.lista-usuarios-container form {
-    display: inline-block;
-    margin: 0;
-}
-
+/* ====== Alertas ====== */
 .lista-usuarios-container .alert {
     padding: 12px 15px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-bottom: 15px;
     font-weight: bold;
 }
 
 .lista-usuarios-container .alert-success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background: rgba(40,167,69,0.2);
+    color: #28a745;
+    border: 1px solid #28a745;
 }
 
+.lista-usuarios-container .alert-danger {
+    background: rgba(220,53,69,0.2);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+/* ====== Paginación ====== */
 .lista-usuarios-container .pagination {
     margin-top: 20px;
     text-align: center;
@@ -169,26 +250,30 @@
 .lista-usuarios-container .page-link {
     padding: 8px 12px;
     margin: 0 2px;
-    border: 1px solid #dee2e6;
+    border: 1px solid #444;
     text-decoration: none;
-    color: #007bff;
-    border-radius: 4px;
+    color: #ffcc00;
+    border-radius: 6px;
     font-weight: bold;
+    transition: all 0.3s ease;
+    background: #1a1a1a;
 }
 
 .lista-usuarios-container .page-link:hover {
-    background: #e9ecef;
+    background: #ffcc00;
+    color: black;
 }
 
 .lista-usuarios-container .page-item.active .page-link {
-    background: #007bff;
-    color: white;
-    border-color: #007bff;
+    background: #ffcc00;
+    color: black;
+    border-color: #ffcc00;
 }
 
+/* ====== Responsive ====== */
 @media (max-width: 768px) {
     .lista-usuarios-container {
-        padding: 10px;
+        padding: 15px;
     }
     
     .lista-usuarios-container .table thead {
@@ -198,20 +283,19 @@
     .lista-usuarios-container .table tbody tr {
         display: block;
         margin-bottom: 15px;
-        border: 1px solid #dee2e6;
-        border-radius: 4px;
+        border: 1px solid #333;
+        border-radius: 8px;
         padding: 10px;
-        background: white;
+        background: rgba(26,26,26,0.9);
     }
     
     .lista-usuarios-container .table tbody td {
         display: block;
         text-align: right;
         padding: 8px 0;
-        border-right: none;
-        border-bottom: 1px solid #dee2e6;
+        border-bottom: 1px solid #333;
         font-weight: bold;
-        color: #2c3e50;
+        color: white;
     }
     
     .lista-usuarios-container .table tbody td:last-child {
@@ -223,7 +307,7 @@
         content: attr(data-label);
         font-weight: bold;
         float: left;
-        color: #495057;
+        color: #ffcc00;
     }
     
     .lista-usuarios-container .btn {
@@ -232,8 +316,182 @@
         margin: 5px 0;
         text-align: center;
     }
-    
-    .lista-usuarios-container .mb-3 {
-        margin-bottom: 10px !important;
+}
+/* ====== Contenedor principal de sugerencias ====== */
+.lista-sugerencias-container {
+    background-color: rgba(26, 26, 26, 0.9);
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+/* ====== Título ====== */
+.lista-sugerencias-container h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: 700;
+    position: relative;
+}
+
+.lista-sugerencias-container h1::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: #ffcc00;
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+/* ====== Tabla ====== */
+.lista-sugerencias-container .table-responsive {
+    background: rgba(26, 26, 26, 0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    margin-top: 15px;
+}
+
+.lista-sugerencias-container .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lista-sugerencias-container .table thead {
+    background: #1a1a1a;
+}
+
+.lista-sugerencias-container .table thead th {
+    color: #ffcc00;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 2px solid #333;
+}
+
+.lista-sugerencias-container .table tbody tr {
+    border-bottom: 1px solid #333;
+}
+
+.lista-sugerencias-container .table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.lista-sugerencias-container .table tbody tr:hover {
+    background-color: rgba(255, 204, 0, 0.1);
+}
+
+.lista-sugerencias-container .table tbody td {
+    padding: 10px;
+    vertical-align: middle;
+    font-weight: normal;
+    color: white;
+}
+
+/* ====== Alertas ====== */
+.lista-sugerencias-container .alert {
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.lista-sugerencias-container .alert-success {
+    background: rgba(40,167,69,0.2);
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.lista-sugerencias-container .alert-danger {
+    background: rgba(220,53,69,0.2);
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+    .lista-sugerencias-container {
+        padding: 15px;
     }
+    
+    .lista-sugerencias-container .table thead {
+        display: none;
+    }
+    
+    .lista-sugerencias-container .table tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 10px;
+        background: rgba(26,26,26,0.9);
+    }
+    
+    .lista-sugerencias-container .table tbody td {
+        display: block;
+        text-align: right;
+        padding: 8px 0;
+        border-bottom: 1px solid #333;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .lista-sugerencias-container .table tbody td:last-child {
+        border-bottom: none;
+        text-align: center;
+    }
+    
+    .lista-sugerencias-container .table tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        float: left;
+        color: #ffcc00;
+    }
+}
+
+/* Contenedor de botones de acciones */
+.acciones {
+    display: flex;
+    gap: 10px;              /* separación horizontal */
+}
+
+/* Botones de acciones iguales */
+.lista-usuarios-container .btn-warning,
+.lista-usuarios-container .btn-danger {
+    width: 100px;           /* mismo ancho */
+    padding: 8px 0;         /* mismo alto */
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;  /* elimina subrayado */
+    border: none;
+    display: inline-block;
+    text-transform: none;   /* evita mayúsculas */
+}
+
+/* Botón Editar */
+.lista-usuarios-container .btn-warning {
+    background: #ffcc00;
+    color: black;
+}
+.lista-usuarios-container .btn-warning:hover {
+    background: #e6b800;
+}
+
+/* Botón Eliminar */
+.lista-usuarios-container .btn-danger {
+    background: #dc3545;
+    color: white;
+}
+.lista-usuarios-container .btn-danger:hover {
+    background: #c82333;
 }

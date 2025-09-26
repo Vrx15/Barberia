@@ -45,16 +45,18 @@ Route::resource('citas', CitaController::class)->middleware('auth');
 Route::middleware(['auth'])->group(function () {
     Route::get('/sugerencias', [SugerenciaController::class, 'create'])->name('sugerencias.create');
     Route::post('/sugerencias', [SugerenciaController::class, 'store'])->name('sugerencias.store');
+    Route::get('/admin/sugerencias', [SugerenciaController::class, 'index'])->name('admin.sugerencias');
 });
 
 // -------------------------
 // Rutas de citas para usuarios autenticados
 // -------------------------
 Route::middleware('auth')->group(function () {
-    Route::get('/formulario', [CitaController::class, 'create'])->name('formulario');
+    Route::get('/formulario/{id?}', [CitaController::class, 'create'])->name('formulario');
     Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
-
+    Route::get('/citas/horas-ocupadas', [CitaController::class, 'horasOcupadas'])->name('citas.horas.ocupadas');
     Route::get('/historial', [CitaController::class, 'historial'])->name('historial');
+    Route::resource('citas', CitaController::class);
 
     Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
     Route::get('/citas/{id}/edit', [CitaController::class, 'edit'])->name('citas.edit');
@@ -62,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/citas/{id}', [CitaController::class, 'show'])->name('citas.show');
     Route::delete('/citas/{id}', [CitaController::class, 'destroy'])->name('citas.destroy');
     Route::post('/citas/{id}/cancelar', [CitaController::class, 'cancelar'])->name('citas.cancelar');
+    Route::post('/citas/{id}/eliminar', [CitaController::class, 'eliminar'])->name('citas.eliminar');
     
 });
 Route::post('/citas/{id}/eliminar', [CitaController::class, 'eliminar'])->name('citas.eliminar');
@@ -74,9 +77,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/crear-usuario', [UsuarioController::class, 'create'])->name('admin.crear.usuario');
     Route::post('/admin/crear-usuario', [UsuarioController::class, 'store'])->name('admin.usuario.store');
     Route::get('/admin/lista-usuarios', [UsuarioController::class, 'index'])->name('admin.lista.usuarios');
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/index', [DashboardController::class, 'index'])->name('admin.index');
+    Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard'); 
+})->name('admin.dashboard');
     Route::get('/admin/usuarios/{usuario}/editar', [UsuarioController::class, 'edit'])->name('admin.usuario.edit');
 Route::put('/admin/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('admin.usuario.update');
+Route::patch('/admin/usuarios/{usuario}/toggle', [UsuarioController::class, 'toggleActivo'])->name('usuarios.toggle');
+
+
 
 });
 

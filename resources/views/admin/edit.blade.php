@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<section class="fade-section">
     <h1>Editar Usuario</h1>
 
     @if ($errors->any())
@@ -54,7 +54,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
-        <a href="{{ route('admin.lista.usuarios') }}" class="btn btn-secondary">Cancelar</a>
+        <button onclick="window.location='{{ route('admin.lista.usuarios') }}'">Cancelar</button>
     </form>
 </div>
 @endsection

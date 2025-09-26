@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="{{ asset('styleregistrarse.css') }}">
     <link rel="stylesheet" href="{{ asset('css/stylelogin.css') }}">
     <link rel="stylesheet" href="{{ asset('stylefooter.css') }}">
-    <link href="{{ asset('styleadmin.css') }}" rel="stylesheet">
-    <link href="{{ asset('styleform.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('styleform.css') }}">
 
     <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -25,12 +24,16 @@
     <!-- Header -->
 <header>
     <div class="encabezado">
-     
-
+        
+    <a href="{{ route('admin.index') }}">Inicio</a>
+    <a href="{{ route('admin.dashboard') }}">Crear usuarios</a>
+    <a href="{{ route('admin.lista.usuarios') }}">Usuarios</a>
+    <a href="{{ route('admin.sugerencias') }}">Sugerencias</a>
+</div>
     </div>
 
     <nav>
-        
+    
 
         @auth
             <div class="dropdown">
@@ -58,4 +61,5 @@
     <main style="flex: 1;">
         @yield('content')
     </main>
+
 

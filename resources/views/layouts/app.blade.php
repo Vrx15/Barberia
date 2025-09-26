@@ -47,17 +47,16 @@
                     <span class="user-name">{{ ucfirst(Auth::user()->username) }}</span>
                     
                     <!-- ✅ Botón historial solo dentro del menú del usuario -->
-                    <button class="dropdown-btn historial-btn" onclick="window.location.href='{{ route('historial') }}'">
-                        <i class="fas fa-history"></i> Mi Historial
-                    </button>
-                    
-                    <form action="{{ route('logout') }}" method="POST" class="logout-form">
-                        @csrf
-                        <button type="submit" class="dropdown-btn logout-btn">
-                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
-                        </button>
-                    </form>
-                </div>
+                   <button class="dropdown-btn historial-btn" onclick="window.location.href='{{ route('historial') }}'">
+    Mi Historial
+</button>
+
+<form action="{{ route('logout') }}" method="POST" class="logout-form">
+    @csrf
+    <button type="submit" class="dropdown-btn logout-btn">
+        Cerrar sesión
+    </button>
+</form>
             </div>
             @endauth
         </nav>
@@ -116,6 +115,8 @@
 
   </div>
 </footer>
+
+@stack('scripts')
 
 </body>
 </html>

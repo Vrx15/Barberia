@@ -11,7 +11,7 @@
     @endif
 
     <div class="mb-3">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">← Crear nuevo usuario</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-crear">Crear nuevo usuario</a>
     </div>
 
     <div class="table-responsive">
@@ -44,18 +44,35 @@
                     </td>
                     <td>{{ $usuario->created_at->format('d/m/Y H:i') }}</td>
                     <td>
-                        <a href="{{ route('admin.usuario.edit', $usuario->id) }}" class="btn btn-sm btn-warning">Editar</a>
-                        
-                        <!-- Botón de eliminar con confirmación -->
-                        <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" 
-                                onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
+    <div class="acciones" style="display:flex; gap:5px;">
+        <form style="margin:0;">
+            <button type="button" 
+                    class="btn btn-warning accion-btn"
+                    onclick="window.location='{{ route('admin.usuario.edit', $usuario->id) }}'">
+                Editar
+            </button>
+        </form>
+
+        <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="margin:0;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger accion-btn"
+                onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
+                Eliminar
+            </button>
+        </form>
+
+        <form action="{{ route('usuarios.toggle', $usuario->id) }}" method="POST" style="margin:0;">
+            @csrf
+            @method('PATCH')
+            <button type="submit" class="btn btn-info accion-btn">
+                {{ $usuario->activo ? 'Desactivar' : 'Activar' }}
+            </button>
+        </form>
+    </div>
+</td>
+
+
                 </tr>
                 @endforeach
             </tbody>

@@ -30,7 +30,9 @@ class CitaController extends Controller
     // Crear cita (cliente)
     public function create($id = null)
     {
-        $barberos = Usuario::where('rol', 'barbero')->get();
+            $barberos = Usuario::where('rol', 'barbero')
+                        ->where('activo', true)
+                        ->get();
 
         if ($id) {
             $cita = Cita::where('id_cita', $id)
@@ -49,15 +51,26 @@ class CitaController extends Controller
             'servicio' => 'required|string',
             'fecha' => 'required|date|after_or_equal:today',
             'hora' => 'required|date_format:H:i',
-            'barbero_id' => 'nullable|exists:usuarios,id',
+            'barbero_id' => 'required|exists:usuarios,id',
         ]);
+
+         $fecha_hora = Carbon::parse($request->fecha . ' ' . $request->hora)->format('Y-m-d H:i:s');
+
+        // 🔒 Validación de unicidad
+        if (Cita::where('barbero_id', $request->barbero_id)
+                  ->where('fecha_hora', $fecha_hora)
+                  ->exists()) {
+            return back()->withErrors([
+                'hora' => 'Ya existe una cita reservada con ese barbero en esa fecha y hora.'
+            ])->withInput();
+        }
         
 
         $cita = Cita::create([
             'usuario_id' => Auth::id(),
             'barbero_id' => $request->barbero_id,
             'servicio'   => $request->servicio,
-            'fecha_hora' => Carbon::parse($request->fecha . ' ' . $request->hora),
+            'fecha_hora' => $fecha_hora,
             'estado'     => 'pendiente',
             'email'      => Auth::user()->email,
         ]);
@@ -176,4 +189,22 @@ class CitaController extends Controller
         $cita->delete();
         return redirect()->route('barbero.citas.index')->with('success', 'Cita eliminada correctamente');
     }
+
+     public function horasOcupadas(Request $request)
+    {
+        $request->validate([
+            'barbero_id' => 'required|exists:usuarios,id',
+            'fecha' => 'required|date',
+        ]);
+
+        $horasOcupadas = Cita::where('barbero_id', $request->barbero_id)
+                             ->whereDate('fecha_hora', $request->fecha)
+                             ->pluck('fecha_hora')
+                             ->map(fn($fh) => \Carbon\Carbon::parse($fh)->format('H:i'))
+                             ->values();
+
+        return response()->json($horasOcupadas);
+    }
 }
+
+

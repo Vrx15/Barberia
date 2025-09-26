@@ -12,7 +12,7 @@ class DashboardController extends Controller
         abort(403, 'No tienes permisos para acceder a esta página.');
     }
 
-    return view('admin.dashboard'); // Esta es la vista específica de admin
+    return view('admin.index'); // Esta es la vista específica de admin
 }
      public function barberoDashboard()
     {

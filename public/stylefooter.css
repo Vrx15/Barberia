@@ -192,12 +192,13 @@ nav {
 /* Botón cerrar sesión */
 .dropdown-content button {
     background-color: #ffcc00;
-    border: none;
+    border: 0px;
     cursor: pointer;
     width: 100%;
     text-align: left;
     padding: 8px;
     color: #050505;
+    text-transform: none;
 }
 
 /* Mostrar el menú al pasar el mouse */
@@ -207,6 +208,7 @@ nav {
 
 .logout-btn {
     text-transform: none !important; /* evita que se ponga en mayúsculas */
+    
 }
 
 .btn-custom {
