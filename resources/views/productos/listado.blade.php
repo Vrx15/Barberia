@@ -34,6 +34,9 @@
         @endforelse
     </div>
 </section>
+<button class="mb-3" onclick="window.location='https://w.app/ewri8d'">
+    Comprar
+</button>
 
 <!-- Efecto hover en las tarjetas -->
 <style>

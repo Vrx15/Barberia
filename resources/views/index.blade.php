@@ -34,7 +34,7 @@
 <div id="bienvenida">
     <img src="LOGO.png" alt="Barbería">
     <div class="texto">
-        <h1>Barberia el Luchon</h1>
+        <h1>Barberia el Luchón</h1>
         <p>El Luchón es una barbería moderna y auténtica donde cada corte se realiza con precisión y pasión, resaltando la personalidad de cada cliente. Aquí no solo te renuevas por fuera, sino que también sales motivado por dentro.</p>
 
              <a href="{{ route('formulario') }}" class="btn-reserva">Reserva tu cita</a>

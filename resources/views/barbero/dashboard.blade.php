@@ -12,14 +12,20 @@
 <section>
         <h2 class="label">Tus Citas</h2>
         <p>Revisa todas tus citas programadas.</p>
-        <button onclick="window.location='{{ route('barbero.citas.index') }}'">Ver citas</button>
+        <button onclick="window.location='{{ route('barbero.citas.index') }}'">Ver</button>
     </section>
 
 
     <section>
         <h2 class="label">Productos</h2>
         <p>Gestiona productos de la barbería.</p>
-        <button onclick="window.location='{{ route('barbero.productos.index') }}'">Ver productos</button>
+        <button onclick="window.location='{{ route('barbero.productos.index') }}'">Ver</button>
+    </section>
+
+        <section>
+        <h2 class="label">Ventas</h2>
+        <p>Vende productos y gestiona las ventas.</p>
+        <button onclick="window.location='{{ route('barbero.ventas.index') }}'">Ver</button>
     </section>
 
 @endsection

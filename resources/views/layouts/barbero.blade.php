@@ -25,8 +25,10 @@
 <header>
     <div class="encabezado">
         
+    <a href="{{ route('barbero.dashboard') }}">Inicio</a>
     <a href="{{ route('barbero.citas.index') }}">Citas</a>
     <a href="{{ route('barbero.productos.index') }}">Productos</a>
+    <a href="{{ route('barbero.ventas.index') }}">Ventas</a>
 </div>
     </div>
 

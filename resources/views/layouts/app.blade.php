@@ -66,7 +66,7 @@
         @yield('content')
     </main>
 
-    <a href="https://www.whatsapp.com/" class="whatsapp-button" target="_blank">
+    <a href="https://w.app/ewri8d" class="whatsapp-button" target="_blank">
         <img src="https://thumbs.dreamstime.com/b/icono-del-logotipo-de-whatsapp-blanco-y-negro-simple-archivo-ai-ilustraci%C3%B3n-vectorial-199912365.jpg" alt="WhatsApp">
     </a>
         <!-- Footer -->
@@ -94,10 +94,14 @@
       </ul>
     </div>
 
+
+
+
+
 <div class="footer-social">
   <h4>Síguenos</h4>
   <div class="social-icons">
-        <a href="https://www.whatsapp.com/" target="_blank" aria-label="WhatsApp">
+        <a href="https://w.app/ewri8d" target="_blank" aria-label="WhatsApp">
       <i class="fab fa-whatsapp"></i>
     </a>
     <a href="https://instagram.com" target="_blank" aria-label="Instagram">
@@ -108,6 +112,17 @@
     </a>
 
   </div>
+
+          <div class="footer-links">
+      <h4>Errores</h4>
+      <ul>
+
+        <li><a href="dads">404</a></li>
+        <li><a href="{{ route('error500') }}">500</a></li>
+
+
+      </ul>
+    </div>
 </div>
 
   <div class="footer-bottom">

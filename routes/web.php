@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SugerenciaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Http\Request;
 
 // -------------------------
@@ -92,34 +93,21 @@ Route::patch('/admin/usuarios/{usuario}/toggle', [UsuarioController::class, 'tog
 // -------------------------
 // Barbero routes
 // -------------------------
-// Grupo de rutas para barbero
+// ==========================
+// Grupo de rutas para BARBERO
+// ==========================
 Route::prefix('barbero')->name('barbero.')->middleware('auth')->group(function () {
-
-    // Dashboard del barbero
+    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'barberoDashboard'])->name('dashboard');
 
-    // Citas del barbero
+    // Citas del barbero (usa BarberoCitaController)
     Route::get('/citas', [BarberoCitaController::class, 'index'])->name('citas.index');
     Route::get('/citas/{cita}', [BarberoCitaController::class, 'show'])->name('citas.show');
     Route::get('/citas/{cita}/editar', [BarberoCitaController::class, 'edit'])->name('citas.edit');
     Route::put('/citas/{cita}', [BarberoCitaController::class, 'update'])->name('citas.update');
     Route::delete('/citas/{cita}', [BarberoCitaController::class, 'destroy'])->name('citas.destroy');
 
-    // Aquí irían otras rutas de productos del barbero, etc.
-});
-
-// -------------------------
-// Productos
-// -------------------------
-Route::resource('productos', ProductoController::class);
-
-// Productos para clientes
-
-    Route::get('/productos', [ProductoController::class, 'indexCliente'])->name('productos.cliente');
-
-
-// Productos para barbero
-Route::prefix('barbero')->name('barbero.')->group(function () {
+    // Productos del barbero
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
     Route::get('/productos/crear', [ProductoController::class, 'create'])->name('productos.create');
     Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
@@ -128,24 +116,44 @@ Route::prefix('barbero')->name('barbero.')->group(function () {
     Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 });
 
-// Rutas de citas
+// ==========================
+// Productos para CLIENTES
+// ==========================
+Route::get('/productos', [ProductoController::class, 'indexCliente'])->name('productos.cliente');
+
+// ==========================
+// Rutas de CITAS (clientes)
+// ==========================
 Route::middleware('auth')->group(function () {
-    // Historial del usuario
+    // Historial del cliente
     Route::get('/historial', [CitaController::class, 'historial'])->name('historial');
     
-    // Citas normales
-    Route::get('/formulario', [CitaController::class, 'create'])->name('formulario');
+    // Crear citas
+    Route::get('/formulario/{id?}', [CitaController::class, 'create'])->name('formulario');
     Route::post('/formulario', [CitaController::class, 'store'])->name('citas.store');
     
-    // Rutas para administración (si necesitas)
+    // Administración de citas
     Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
-    
-    // Rutas para editar, ver y cancelar
     Route::get('/citas/{id}/edit', [CitaController::class, 'edit'])->name('citas.edit');
     Route::put('/citas/{id}', [CitaController::class, 'update'])->name('citas.update');
     Route::get('/citas/{id}', [CitaController::class, 'show'])->name('citas.show');
     Route::delete('/citas/{id}', [CitaController::class, 'destroy'])->name('citas.destroy');
     Route::post('/citas/{id}/cancelar', [CitaController::class, 'cancelar'])->name('citas.cancelar');
+    Route::post('/citas/{id}/eliminar', [CitaController::class, 'eliminar'])->name('citas.eliminar');
 });
-Route::post('/citas/{id}/eliminar', [CitaController::class, 'eliminar'])->name('citas.eliminar');
-Route::get('/formulario/{id?}', [CitaController::class, 'create'])->name('formulario');
+
+//Ventas
+
+Route::prefix('barbero')->name('barbero.')->middleware('auth')->group(function () {
+    // CRUD de ventas
+    Route::resource('ventas', VentaController::class)->except(['edit', 'update']);
+
+    // Factura individual de una venta
+    Route::get('ventas/{venta}/factura', [VentaController::class, 'factura'])->name('ventas.factura');
+});
+
+//Error 500
+
+Route::get('/error500', function () {
+    abort(500); // fuerza el error 500
+})->name('error500');

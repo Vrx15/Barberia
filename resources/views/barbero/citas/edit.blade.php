@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.barbero')
 
 @section('content')
 <section class="fade-section">
@@ -37,18 +37,7 @@
                    value="{{ old('fecha_hora', $cita->fecha_hora ? \Carbon\Carbon::parse($cita->fecha_hora)->format('Y-m-d\TH:i') : '') }}" required>
         </div>
 
-        <!-- Barbero -->
-        <div class="mb-3">
-            <label for="barbero_id" class="form-label">Barbero</label>
-            <select name="barbero_id" id="barbero_id" class="form-select">
-                <option value="">-- No asignado --</option>
-                @foreach($barberos as $barbero)
-                    <option value="{{ $barbero->id }}" {{ old('barbero_id', $cita->barbero_id) == $barbero->id ? 'selected' : '' }}>
-                        {{ $barbero->username }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        
 
         <!-- Estado -->
         <div class="mb-3">

@@ -44,41 +44,42 @@
                     </td>
                     <td>{{ $usuario->created_at->format('d/m/Y H:i') }}</td>
                     <td>
-    <div class="acciones" style="display:flex; gap:5px;">
-        <form style="margin:0;">
-            <button type="button" 
-                    class="btn btn-warning accion-btn"
-                    onclick="window.location='{{ route('admin.usuario.edit', $usuario->id) }}'">
-                Editar
-            </button>
-        </form>
+                        <div class="acciones" style="display:flex; gap:5px;">
+                            <form style="margin:0;">
+                                <button type="button" 
+                                        class="btn btn-warning accion-btn"
+                                        onclick="window.location='{{ route('admin.usuario.edit', $usuario->id) }}'">
+                                    Editar
+                                </button>
+                            </form>
 
-        <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="margin:0;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger accion-btn"
-                onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
-                Eliminar
-            </button>
-        </form>
+                            <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="margin:0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger accion-btn"
+                                    onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
+                                    Eliminar
+                                </button>
+                            </form>
 
-        <form action="{{ route('usuarios.toggle', $usuario->id) }}" method="POST" style="margin:0;">
-            @csrf
-            @method('PATCH')
-            <button type="submit" class="btn btn-info accion-btn">
-                {{ $usuario->activo ? 'Desactivar' : 'Activar' }}
-            </button>
-        </form>
-    </div>
-</td>
-
-
+                            <form action="{{ route('usuarios.toggle', $usuario->id) }}" method="POST" style="margin:0;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-info accion-btn">
+                                    {{ $usuario->activo ? 'Desactivar' : 'Activar' }}
+                                </button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 
-    {{ $usuarios->links() }} {{-- Paginación --}}
+    <div class="paginacion-container">
+    {{ $usuarios->links('pagination::bootstrap-5') }}
+</div>
+
 </div>
 @endsection

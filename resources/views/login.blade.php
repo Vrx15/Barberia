@@ -6,6 +6,13 @@
 <div class="login-container">
     <section>
         <h1>Iniciar Sesión</h1>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
 
         @if(session('error'))
             <div class="error-message">{{ session('error') }}</div>
@@ -31,4 +38,5 @@
 
     </section>
 </div>
+
 @endsection

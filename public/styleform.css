@@ -21,6 +21,7 @@
     margin: 2px;
     transition: all 0.3s ease;
     text-align: center; 
+    margin-top: 10px;
 }
 
 /* Botón especial para crear */
@@ -494,4 +495,55 @@
 }
 .lista-usuarios-container .btn-danger:hover {
     background: #c82333;
+}
+
+/* Paginacion */
+
+.pagination {
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    gap: 8px;
+    list-style: none;
+    padding: 15px 0;
+}
+.paginacion-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-item {
+    display: inline-block;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.page-link:hover {
+    background: #f0f0f0;
+}
+
+.page-item.active .page-link {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+.page-item.disabled .page-link {
+    color: #aaa;
+    pointer-events: none;
+    background: #f9f9f9;
+}
+
+.page-item:first-child,
+.page-item:last-child {
+    display: none;
 }

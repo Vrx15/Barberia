@@ -25,16 +25,19 @@
         @endif
 
         {{-- Servicio --}}
-        <div class="mb-3">
-            <label for="servicio">Servicio</label>
-            <select name="servicio" id="servicio" class="form-control" required>
-                <option value="">Selecciona un servicio</option>
-                <option value="Corte de cabello" {{ (isset($cita) && $cita->servicio == 'Corte de cabello') || old('servicio') == 'Corte de cabello' ? 'selected' : '' }}>Corte de cabello</option>
-                <option value="Afeitado" {{ (isset($cita) && $cita->servicio == 'Afeitado') || old('servicio') == 'Afeitado' ? 'selected' : '' }}>Afeitado</option>
-                <option value="Arreglo de barba" {{ (isset($cita) && $cita->servicio == 'Arreglo de barba') || old('servicio') == 'Arreglo de barba' ? 'selected' : '' }}>Arreglo de barba</option>
-                <option value="Combo (corte + barba)" {{ (isset($cita) && $cita->servicio == 'Combo (corte + barba)') || old('servicio') == 'Combo (corte + barba)' ? 'selected' : '' }}>Combo (corte + barba)</option>
-            </select>
-        </div>
+
+ <div class="mb-3">
+        <label for="servicio">Selecciona un servicio</label>
+        <select name="servicio" id="servicio" class="form-control" required>
+            <option value="">Selecciona un servicio</option>
+            <option value="Barba" {{ (isset($cita) && $cita->servicio == 'Barba') || old('servicio') == 'Barba' ? 'selected' : '' }}>Barba</option>
+            <option value="Corte" {{ (isset($cita) && $cita->servicio == 'Corte') || old('servicio') == 'Corte' ? 'selected' : '' }}>Corte</option>
+            <option value="Cejas" {{ (isset($cita) && $cita->servicio == 'Cejas') || old('servicio') == 'Cejas' ? 'selected' : '' }}>Cejas</option>
+            <option value="Tintura" {{ (isset($cita) && $cita->servicio == 'Tintura') || old('servicio') == 'Tintura' ? 'selected' : '' }}>Tintura</option>
+            <option value="Skincare" {{ (isset($cita) && $cita->servicio == 'Skincare') || old('servicio') == 'Skincare' ? 'selected' : '' }}>Skincare</option>
+            <option value="Asesoria" {{ (isset($cita) && $cita->servicio == 'Asesoria') || old('servicio') == 'Asesoria' ? 'selected' : '' }}>Asesoria</option>
+        </select>
+    </div>
 
         {{-- Barbero --}}
         <div class="mb-3">
