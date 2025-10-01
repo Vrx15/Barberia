@@ -51,7 +51,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Actualizar Cita</button>
-        <a href="{{ route('barbero.citas.index') }}" class="btn btn-secondary">Cancelar</a>
+        <button class="mb-3" onclick="window.location='{{ route('barbero.productos.index') }}'">Lista de citas</button>
     </form>
 </div>
 @endsection

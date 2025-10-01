@@ -26,7 +26,10 @@
                     <strong>Cantidad disponible:</strong> {{ $producto->cantidad }}
                 </p>
 
-               
+                <!-- Botón comprar individual -->
+                <button class="btn-comprar" onclick="window.location='https://w.app/ewri8d'">
+                    Comprar
+                </button>
 
             </section>
         @empty
@@ -34,15 +37,28 @@
         @endforelse
     </div>
 </section>
-<button class="mb-3" onclick="window.location='https://w.app/ewri8d'">
-    Comprar
-</button>
 
 <!-- Efecto hover en las tarjetas -->
 <style>
 .productos-grid section:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.btn-comprar {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-comprar:hover {
+    background-color: #218838;
 }
 </style>
 
